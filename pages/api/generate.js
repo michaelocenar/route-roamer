@@ -10,17 +10,24 @@ export default async function (req, res) {
     res.status(500).json({
       error: {
         message: "OpenAI API key not configured, please follow instructions in README.md",
-      }
+      },
     });
     return;
   }
 
-  const animal = req.body.animal || '';
-  if (animal.trim().length === 0) {
+  const {
+    destination,
+    startDate,
+    endDate,
+    budget,
+    preferences,
+  } = req.body;
+
+  if (!destination || !startDate || !endDate || !budget) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid animal",
-      }
+        message: "Please provide all required fields: destination, start date, end date, and budget",
+      },
     });
     return;
   }
@@ -28,12 +35,14 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(animal),
-      temperature: 0.6,
+      prompt: generatePrompt(destination, startDate, endDate, budget, preferences),
+      temperature: 0.8,
+      max_tokens: 200,
     });
+
+    console.log("Completion data:", completion.data.choices[0]);
     res.status(200).json({ result: completion.data.choices[0].text });
-  } catch(error) {
-    // Consider adjusting the error handling logic for your use case
+  } catch (error) {
     if (error.response) {
       console.error(error.response.status, error.response.data);
       res.status(error.response.status).json(error.response.data);
@@ -42,21 +51,19 @@ export default async function (req, res) {
       res.status(500).json({
         error: {
           message: 'An error occurred during your request.',
-        }
+        },
       });
     }
   }
 }
 
-function generatePrompt(animal) {
-  const capitalizedAnimal =
-    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `Suggest three names for an animal that is a superhero.
+function generatePrompt(destination, startDate, endDate, budget, preferences) {
+  const { activities, accommodation, transportation } = preferences;
 
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: ${capitalizedAnimal}
-Names:`;
+  return `Create a suggested itinerary for a trip to ${destination} from ${startDate} to ${endDate} with a budget of $${budget}.
+Optional preferences:
+Also list restaurants that someone can go to in ${destination}.
+Activities: ${activities || 'Not specified'}
+Accommodation: ${accommodation || 'Not specified'}
+Transportation: ${transportation || 'Not specified'}`;
 }

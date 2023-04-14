@@ -1,0 +1,74 @@
+@font-face {
+  font-family: "ColfaxAI";
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
+      format("woff2"),
+    url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ColfaxAI";
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
+    url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.title {
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: bold;
+  color: #202123;
+  margin: 0;
+  padding: 0;
+}
+
+.itinerary {
+  margin-top: 40px;
+  list-style: none;
+  padding: 0;
+  font-size: 24px;
+  line-height: 1.5;
+  color: #353740;
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+}
+
+.itinerary li {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 20px;
+  position: relative;
+}
+
+.itinerary li:before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: #10a37f;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.itinerary li:last-of-type {
+  margin-bottom: 0;
+}
+
+.itinerary li:last-of-type:before {
+  display: none;
+}

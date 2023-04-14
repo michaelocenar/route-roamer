@@ -1,9 +1,18 @@
 import Head from "next/head";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [destination, setDestination] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [budget, setBudget] = useState("");
+  const [preferences, setPreferences] = useState({
+    activities: "",
+    accommodation: "",
+    transportation: "",
+  });
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
@@ -14,7 +23,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({ destination, startDate, endDate, budget, preferences }),
       });
 
       const data = await response.json();
@@ -23,9 +32,33 @@ export default function Home() {
       }
 
       setResult(data.result);
-      setAnimalInput("");
-    } catch(error) {
-      // Consider implementing your own error handling logic here
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    }
+  }
+
+  const router = useRouter();
+
+  async function onSubmit(event) {
+    event.preventDefault();
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ destination, startDate, endDate, budget, preferences }),
+      });
+
+      const data = await response.json();
+      if (response.status !== 200) {
+        throw data.error || new Error(`Request failed with status ${response.status}`);
+      }
+
+      setResult(data.result);
+      router.push({ pathname: "/itinerary", query: { result: data.result } });
+    } catch (error) {
       console.error(error);
       alert(error.message);
     }
@@ -34,22 +67,72 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <title>Travel Itinerary Generator</title>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <h3>Create your travel itinerary</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="destination"
+            placeholder="Enter destination"
+            value={destination}
+            onChange={(e) => setDestination(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input
+            type="date"
+            name="start_date"
+            placeholder="Enter start date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          <input
+            type="date"
+            name="end_date"
+            placeholder="Enter end date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+          <input
+            type="number"
+            name="budget"
+            placeholder="Enter your budget"
+            value={budget}
+            onChange={(e) => setBudget(e.target.value)}
+          />
+          <div>
+            <h4>Preferences</h4>
+            <input
+              type="text"
+              name="activities"
+              placeholder="Enter activity preferences"
+              value={preferences.activities}
+              onChange={(e) =>
+                setPreferences({ ...preferences, activities: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              name="accommodation"
+              placeholder="Enter accommodation preferences"
+              value={preferences.accommodation}
+              onChange={(e) =>
+                setPreferences({ ...preferences, accommodation: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              name="transportation"
+              placeholder="Enter transportation preferences"
+              value={preferences.transportation}
+              onChange={(e) =>
+                setPreferences({ ...preferences, transportation: e.target.value })
+              }
+            />
+          </div>
+          <input type="submit" value="Generate itinerary" />
         </form>
         <div className={styles.result}>{result}</div>
       </main>
