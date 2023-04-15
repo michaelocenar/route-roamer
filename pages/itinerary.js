@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import styles from "./itinerary.module.css";
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
@@ -14,6 +14,11 @@ const center = {
   lng: -74.0060,
 };
 
+const locations = [
+  { id: 1, name: 'Location 1', position: { lat: 40.7158, lng: -74.0110 } },
+  { id: 2, name: 'Location 2', position: { lat: 40.7098, lng: -74.0010 } },
+  { id: 3, name: 'Location 3', position: { lat: 40.7138, lng: -74.0065 } },
+];
 
 export default function Itinerary() {
   const router = useRouter();
@@ -46,7 +51,15 @@ export default function Itinerary() {
             mapContainerStyle={mapContainerStyle}
             zoom={12}
             center={center}
-          />
+          >
+            {locations.map((location) => (
+              <Marker
+                key={location.id}
+                position={location.position}
+                title={location.name}
+              />
+            ))}
+          </GoogleMap>
         </LoadScript>
         <div className={styles.tiles}>{itineraryItems}</div>
       </div>
