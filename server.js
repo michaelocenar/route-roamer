@@ -1,7 +1,9 @@
 const express = require("express");
 const next = require("next");
 const generateItinerary = require(".api/generate");
+const saveItineraryRoutes = require("pages/api/save_itinerary");
 
+const db = require("./db/connection");
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -25,3 +27,5 @@ app.prepare().then(() => {
     console.log(`> Ready on http://localhost:${port}`);
   });
 });
+
+app.use('/api/save_itinerary', saveItineraryRoutes);

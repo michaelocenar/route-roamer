@@ -7,10 +7,10 @@ export default function Itinerary() {
 
   if (typeof result === "string") {
     const itineraryItems = result
-      .split("DAY ")
-      .filter((item) => item.trim() !== "")
-      .map((dayItinerary, index) => (
-        <div key={index} className={styles.day}>
+    .split("DAY ")
+    .filter((item) => item.trim() !== "")
+    .map((dayItinerary, index) => (
+      <div key={index} className={styles.day}>
           <h2>Day {index + 1}</h2>
           <ul className={styles.itinerary}>
             {dayItinerary
@@ -18,12 +18,14 @@ export default function Itinerary() {
               .filter((item) => item.trim() !== "")
               .map((item, index) => (
                 <li key={index}>{item.trim()}</li>
-              ))}
+                ))}
           </ul>
         </div>
       ));
-    return (
-      <div className={styles.container}>
+      console.log("result: ", result);
+      console.log("itineraryItems: ", itineraryItems);
+      return (
+        <div className={styles.container}>
         <h1>Your Travel Itinerary</h1>
         <div className={styles.tiles}>{itineraryItems}</div>
       </div>
