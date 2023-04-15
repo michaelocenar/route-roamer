@@ -5,7 +5,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-export default async function (req, res) {
+module.exports = async function (req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
