@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import styles from "./index.module.css";
-import NewComponent from "../components/NewComponent";
 
 export default function Home() {
   const [destination, setDestination] = useState("");
@@ -135,9 +134,6 @@ export default function Home() {
           </div>
           <input type="submit" value="Generate itinerary" />
         </form>
-        <div>
-          <NewComponent />
-        </div>
         <div className={styles.result}>{result}</div>
       </main>
     </div>
