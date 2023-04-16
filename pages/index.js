@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import styles from "./index.module.css";
+import Nav from "../components/Nav";
 
 export default function Home() {
   const [destination, setDestination] = useState("");
@@ -66,6 +67,7 @@ export default function Home() {
 
   return (
     <div>
+      <Nav />
       <Head>
         <title>Travel Itinerary Generator</title>
         <link rel="icon" href="/favicon.ico" />
