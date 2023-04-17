@@ -40,7 +40,7 @@ module.exports = async function (req, res) {
       max_tokens: 200,
     });
 
-    console.log("Completion data:", completion.data.choices[0]);
+    console.log("Completion data:", completion.data.choices[0].text);
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch (error) {
     if (error.response) {
