@@ -21,6 +21,56 @@ export default function Itinerary() {
   const { result } = router.query;
   console.log("result:", result);
 
+  const modifiedResult = JSON.parse(result);
+  // console.log("##01modifiedResult", modifiedResult);
+  // console.log("##02modifiedResult", modifiedResult["Itinerary"]);
+  // console.log("##03modifiedResult", modifiedResult["Itinerary"][0]["Activities"][0]["Activity"]);
+  // console.log("##04modifiedResult", modifiedResult["Itinerary"][0]["Activities"][1]["Activity"]);
+
+  // function extractData(result) {
+  //   const modifiedResult = JSON.parse(result);
+  //   const time = [];
+  //   const activity = [];
+  //   const description = [];
+  //   const lat = [];
+  //   const lng = [];
+
+  //   modifiedResult.Itinerary[0].Activities.forEach(item => {
+  //     time.push(item.Time);
+  //     activity.push(item.Activity);
+  //     description.push(item.Description);
+  //     lat.push(item.Location.lat);
+  //     lng.push(item.Location.lng);
+  //   });
+
+  //   return { time, activity, lat, lng, description };
+  // }
+
+  // const extractedData = extractData(result);
+  // console.log("time", extractedData.time); // Output: ["9AM", "11AM", "1PM", "3PM", "5PM"]
+  // console.log("activity", extractedData.activity); // Output: ["Stanley Park Seawall", "Granville Island Public Market", "Museum of Anthropology", "Vancouver Lookout", "Gastown"]
+  // console.log("description", extractedData.description);
+  // console.log("lat", extractedData.lat); // Output: [49.3021, 49.2714, 49.2631, 49.2804, 49.2839]
+  // console.log("lng", extractedData.lng); // Output: [-123.1401, -123.1241, -123.2485, -123.1147, -123.1093]
+
+  const activityArray = [];
+
+  modifiedResult.Itinerary.forEach((day) => {
+    day.Activities.forEach((activity) => {
+      const activityObj = {
+        time: activity.Time,
+        lat: activity.Location.lat,
+        lng: activity.Location.lng,
+        description: activity.Description,
+      };
+      activityArray.push(activityObj);
+    });
+  });
+
+  console.log("activityArray", activityArray);
+
+  /// END OF WIP CODE
+
   const [openInfoWindow, setOpenInfoWindow] = useState(-1);
 
   if (typeof result === "string") {
