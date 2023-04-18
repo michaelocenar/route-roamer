@@ -1,6 +1,12 @@
 import { useRouter } from "next/router";
 import styles from "./itinerary.module.css";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
+import React, { useState } from "react";
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
@@ -14,10 +20,25 @@ function parseItinerary(itineraryText) {
   return itineraryData.Itinerary;
 }
 
+function findActivityByLocation(location, itinerary) {
+  for (const day of itinerary) {
+    for (const activity of day.Activities) {
+      if (
+        activity.Location.lat === location.lat &&
+        activity.Location.lng === location.lng
+      ) {
+        return activity;
+      }
+    }
+  }
+}
+
 export default function Itinerary() {
   const router = useRouter();
   const { result } = router.query;
   console.log("result:", result);
+
+  const [openInfoWindow, setOpenInfoWindow] = useState(-1);
 
   if (typeof result === "string") {
     const itinerary = parseItinerary(result);
@@ -37,9 +58,36 @@ export default function Itinerary() {
       <div className={styles.container}>
         <h1>Your Travel Itinerary</h1>
         <LoadScript googleMapsApiKey={API_KEY}>
-          <GoogleMap mapContainerStyle={mapContainerStyle} zoom={12} center={mapCenter}>
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            zoom={12}
+            center={mapCenter}
+          >
             {allLocations.map((location, index) => (
-              <Marker key={index} position={location} />
+              <Marker
+                key={index}
+                position={location}
+                onClick={() => setOpenInfoWindow(index)}
+              >
+                {openInfoWindow === index && (
+                  <InfoWindow onCloseClick={() => setOpenInfoWindow(-1)}>
+                    <div>
+                      {(() => {
+                        const activity = findActivityByLocation(
+                          location,
+                          itinerary
+                        );
+                        return (
+                          <>
+                            <h4>{activity.Activity}</h4>
+                            <p>{activity.Description}</p>
+                          </>
+                        );
+                      })()}
+                    </div>
+                  </InfoWindow>
+                )}
+              </Marker>
             ))}
           </GoogleMap>
         </LoadScript>
