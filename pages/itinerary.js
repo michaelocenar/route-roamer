@@ -108,28 +108,31 @@ export default function Itinerary() {
               <h2>{day.Date}</h2>
               <ul className={styles.itinerary}>
                 {day.Activities.map((activity, activityIndex) => (
-                  <li
-                    key={activityIndex}
-                    onClick={() => handleTextClick(dayIndex, activityIndex)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    {activity.Time}: {activity.Activity}
+                  <li key={activityIndex}>
+                    {activity.Time}:{" "}
+                    <a
+                      onClick={() =>
+                        handleTextClick(dayIndex, activityIndex)
+                      }
+                      style={{ cursor: "pointer", color: "blue" }}
+                    >
+                      {activity.Activity}
+                    </a>
                     <br />
                     {activity.Description}
                   </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className={styles.container}>
-        <h1>Error: No itinerary data found.</h1>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className={styles.container}>
+          <h1>Error: No itinerary data found.</h1>
+        </div>
+      );
+    }
   }
-}
-
