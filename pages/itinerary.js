@@ -7,6 +7,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import React, { useState } from "react";
+import { parseItinerary, findActivityByLocation } from "./itineraryHelpers";
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
@@ -14,24 +15,6 @@ const mapContainerStyle = {
   width: "100%",
   height: "400px",
 };
-
-function parseItinerary(itineraryText) {
-  const itineraryData = JSON.parse(itineraryText);
-  return itineraryData.Itinerary;
-}
-
-function findActivityByLocation(location, itinerary) {
-  for (const day of itinerary) {
-    for (const activity of day.Activities) {
-      if (
-        activity.Location.lat === location.lat &&
-        activity.Location.lng === location.lng
-      ) {
-        return activity;
-      }
-    }
-  }
-}
 
 export default function Itinerary() {
   const router = useRouter();
