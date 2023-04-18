@@ -1,7 +1,7 @@
 const db = require("./db/connection");
 
 db.query(
-  'INSERT INTO itineraries (user_id, ',
+  'INSERT INTO itinerary_activities (user_id, ',
   [map_title, map_description, image_url, user_id],
   (err, result) => {
     if (err) {

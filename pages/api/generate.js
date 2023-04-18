@@ -5,7 +5,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-module.exports = async function (req, res) {
+module.exports = async function(req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -55,7 +55,7 @@ module.exports = async function (req, res) {
       });
     }
   }
-}
+};
 
 function generatePrompt(destination, startDate, endDate, budget, preferences) {
   const { activities, accommodation, transportation } = preferences;

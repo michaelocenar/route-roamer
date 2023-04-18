@@ -38,6 +38,36 @@ export default function Itinerary() {
   const { result } = router.query;
   console.log("result:", result);
 
+  // const modifiedResult = JSON.parse(result);
+  // console.log("##01modifiedResult", modifiedResult);
+  // console.log("##02modifiedResult", modifiedResult["Itinerary"]);
+  // console.log("##03modifiedResult", modifiedResult["Itinerary"][0]["Activities"][0]["Activity"]);
+  // console.log("##04modifiedResult", modifiedResult["Itinerary"][0]["Activities"][1]["Activity"]);
+
+  function extractData(result) {
+    const modifiedResult = JSON.parse(result);
+    const time = [];
+    const activity = [];
+    const lat = [];
+    const lng = [];
+
+    modifiedResult.Itinerary[0].Activities.forEach(item => {
+      time.push(item.Time);
+      activity.push(item.Activity);
+      lat.push(item.Location.lat);
+      lng.push(item.Location.lng);
+    });
+
+    return { time, activity, lat, lng };
+  }
+
+  const extractedData = extractData(result);
+  console.log(extractedData.time); // Output: ["9AM", "11AM", "1PM", "3PM", "5PM"]
+  console.log(extractedData.activity); // Output: ["Stanley Park Seawall", "Granville Island Public Market", "Museum of Anthropology", "Vancouver Lookout", "Gastown"]
+  console.log(extractedData.lat); // Output: [49.3021, 49.2714, 49.2631, 49.2804, 49.2839]
+  console.log(extractedData.lng); // Output: [-123.1401, -123.1241, -123.2485, -123.1147, -123.1093]
+
+
   const [openInfoWindow, setOpenInfoWindow] = useState(-1);
 
   if (typeof result === "string") {
