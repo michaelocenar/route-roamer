@@ -7,6 +7,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import React, { useState } from "react";
+import { parseItinerary, findActivityByLocation } from "./itineraryHelpers";
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
@@ -14,26 +15,6 @@ const mapContainerStyle = {
   width: "100%",
   height: "400px",
 };
-
-function parseItinerary(itineraryText) {
-  const itineraryData = JSON.parse(itineraryText);
-  return itineraryData.Itinerary;
-}
-
-function findActivityByLocation(location, itinerary) {
-  for (const day of itinerary) {
-    for (const activity of day.Activities) {
-      if (
-        activity.Location.lat === location.lat &&
-        activity.Location.lng === location.lng
-      ) {
-        return activity;
-      }
-    }
-  }
-}
-
-//// BEGIN WIP CODE
 
 export default function Itinerary() {
   const router = useRouter();
@@ -160,28 +141,31 @@ export default function Itinerary() {
               <h2>{day.Date}</h2>
               <ul className={styles.itinerary}>
                 {day.Activities.map((activity, activityIndex) => (
-                  <li
-                    key={activityIndex}
-                    onClick={() => handleTextClick(dayIndex, activityIndex)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    {activity.Time}: {activity.Activity}
+                  <li key={activityIndex}>
+                    {activity.Time}:{" "}
+                    <a
+                      onClick={() =>
+                        handleTextClick(dayIndex, activityIndex)
+                      }
+                      style={{ cursor: "pointer", color: "blue" }}
+                    >
+                      {activity.Activity}
+                    </a>
                     <br />
                     {activity.Description}
                   </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className={styles.container}>
-        <h1>Error: No itinerary data found.</h1>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className={styles.container}>
+          <h1>Error: No itinerary data found.</h1>
+        </div>
+      );
+    }
   }
-}
-
