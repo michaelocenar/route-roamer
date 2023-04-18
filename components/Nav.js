@@ -5,7 +5,7 @@ import styles from './Nav.module.css';
 const Nav = () => {
   return (
     <div className={styles.nav}>
-      <h2>THIS IS THE NAV BAR</h2>
+      <h2>ROUTE ROAMER</h2>
       <nav>
         <Link href="/">Homepage</Link>
         <Link href="/profile">Profile</Link>

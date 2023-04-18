@@ -73,11 +73,10 @@ export default function Home() {
       <Nav />
       <Head>
         <title>Travel Itinerary Generator</title>
-        <link rel="icon" href="/favicon.ico" />
-        <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
       </Head>
-
-      <RotatingGlobe />
+      <div className={styles.background}>
+     <RotatingGlobe/>
+     </div>
       <main className={styles.main}>
         <h3>Create your travel itinerary</h3>
         <form onSubmit={onSubmit}>

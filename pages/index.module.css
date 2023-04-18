@@ -49,10 +49,7 @@
   margin-bottom: 24px;
   outline-color: #10a37f;
 }
-.main ::placeholder {
-  color: #8e8ea0;
-  opacity: 1;
-}
+
 .main input[type="submit"] {
   padding: 12px 0;
   color: #fff;
@@ -65,14 +62,5 @@
 .main .result {
   font-weight: bold;
   margin-top: 40px;
-}
-
-.rotating-globe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 50%;
-  z-index: 0; 
 }
 
