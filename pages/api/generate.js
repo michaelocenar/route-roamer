@@ -36,11 +36,11 @@ module.exports = async function (req, res) {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: generatePrompt(destination, startDate, endDate, budget, preferences),
-      temperature: 0.8,
-      max_tokens: 200,
+      temperature: 0.7,
+      max_tokens: 2000,
     });
 
-    console.log("Completion data:", completion.data.choices[0].text);
+    console.log("Completion data:", completion.data);
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch (error) {
     if (error.response) {
@@ -60,10 +60,29 @@ module.exports = async function (req, res) {
 function generatePrompt(destination, startDate, endDate, budget, preferences) {
   const { activities, accommodation, transportation } = preferences;
 
-  return `Create a suggested itinerary for a trip to ${destination} from ${startDate} to ${endDate} with a budget of $${budget}.
-Optional preferences:
-Also list restaurants that someone can go to in ${destination}.
-Activities: ${activities || 'Not specified'}
-Accommodation: ${accommodation || 'Not specified'}
-Transportation: ${transportation || 'Not specified'}`;
+  return `Create a suggested itinerary for a trip to ${destination} from ${startDate} to ${endDate} with a budget of $${budget}. Return the itinerary in JSON format using the following structure:
+
+  {
+    "Itinerary": [
+      {
+        "Date": "Date of the activities",
+        "Activities": [
+          {
+            "Time": "Suggested time for the activity",
+            "Activity": "Activity name",
+            "Location": {
+              "lat": "Latitude of the activity in decimal format",
+              "lng": "Longitude of the activity in decimal format"
+            },
+            "Description": "Activity description"
+          }
+        ]
+      }
+    ]
+  }
+  
+  Optional preferences:
+  Activities: ${activities || 'Not specified'}
+  Accommodation: ${accommodation || 'Not specified'}
+  Transportation: ${transportation || 'Not specified'}`;
 }
