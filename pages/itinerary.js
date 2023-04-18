@@ -42,8 +42,12 @@ export default function Itinerary() {
 
   if (typeof result === "string") {
     const itinerary = parseItinerary(result);
-    const allLocations = itinerary.flatMap((day) =>
-      day.Activities.map((activity) => activity.Location)
+    const allLocations = itinerary.flatMap((day, dayIndex) =>
+      day.Activities.map((activity, activityIndex) => ({
+        ...activity.Location,
+        dayIndex,
+        activityIndex,
+      }))
     );
     const mapCenter = {
       lat:
@@ -52,6 +56,13 @@ export default function Itinerary() {
       lng:
         allLocations.reduce((sum, loc) => sum + loc.lng, 0) /
         allLocations.length,
+    };
+
+    const handleTextClick = (dayIndex, activityIndex) => {
+      const locationIndex = allLocations.findIndex(
+        (loc) => loc.dayIndex === dayIndex && loc.activityIndex === activityIndex
+      );
+      setOpenInfoWindow(locationIndex);
     };
 
     return (
@@ -97,7 +108,11 @@ export default function Itinerary() {
               <h2>{day.Date}</h2>
               <ul className={styles.itinerary}>
                 {day.Activities.map((activity, activityIndex) => (
-                  <li key={activityIndex}>
+                  <li
+                    key={activityIndex}
+                    onClick={() => handleTextClick(dayIndex, activityIndex)}
+                    style={{ cursor: "pointer" }}
+                  >
                     {activity.Time}: {activity.Activity}
                     <br />
                     {activity.Description}
@@ -117,3 +132,4 @@ export default function Itinerary() {
     );
   }
 }
+
