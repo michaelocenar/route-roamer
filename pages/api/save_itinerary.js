@@ -1,14 +1,14 @@
 const db = require("./db/connection");
 
-db.query(
-  'INSERT INTO itinerary_activities (user_id, ',
-  [map_title, map_description, image_url, user_id],
-  (err, result) => {
+activityArray.forEach((activity) => {
+  const query = `INSERT INTO itinerary_activities (time, lat, lng, description) VALUES ($1, $2, $3, $4)`;
+  const values = [time, itinerary_activities.latitude, itinerary_activities.longitude, activity.description];
+
+  db.query(query, values, (err, res) => {
     if (err) {
       console.error(err);
     } else {
-      console.log(`Map ${result.id} inserted successfully`);
-      res.send({ maps: result.rows[0] });
+      console.log(`Activity inserted successfully`);
     }
-  }
-);
+  });
+});
