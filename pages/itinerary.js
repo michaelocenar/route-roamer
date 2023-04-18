@@ -1,67 +1,127 @@
 import { useRouter } from "next/router";
 import styles from "./itinerary.module.css";
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
+import React, { useState } from "react";
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
 const mapContainerStyle = {
-  width: '100%',
-  height: '400px',
+  width: "100%",
+  height: "400px",
 };
 
-const center = {
-  lat: 40.7128,
-  lng: -74.0060,
-};
+function parseItinerary(itineraryText) {
+  const itineraryData = JSON.parse(itineraryText);
+  return itineraryData.Itinerary;
+}
 
-const locations = [
-  { id: 1, name: 'Location 1', position: { lat: 40.7158, lng: -74.0110 } },
-  { id: 2, name: 'Location 2', position: { lat: 40.7098, lng: -74.0010 } },
-  { id: 3, name: 'Location 3', position: { lat: 40.7138, lng: -74.0065 } },
-];
+function findActivityByLocation(location, itinerary) {
+  for (const day of itinerary) {
+    for (const activity of day.Activities) {
+      if (
+        activity.Location.lat === location.lat &&
+        activity.Location.lng === location.lng
+      ) {
+        return activity;
+      }
+    }
+  }
+}
 
 export default function Itinerary() {
   const router = useRouter();
   const { result } = router.query;
+  console.log("result:", result);
+
+  const [openInfoWindow, setOpenInfoWindow] = useState(-1);
 
   if (typeof result === "string") {
-    const itineraryItems = result
-    .split("DAY ")
-    .filter((item) => item.trim() !== "")
-    .map((dayItinerary, index) => (
-      <div key={index} className={styles.day}>
-          <h2>Day {index + 1}</h2>
-          <ul className={styles.itinerary}>
-            {dayItinerary
-              .split("\n")
-              .filter((item) => item.trim() !== "")
-              .map((item, index) => (
-                <li key={index}>{item.trim()}</li>
-                ))}
-          </ul>
-        </div>
-      ));
-      console.log("result: ", result);
-      console.log("itineraryItems: ", itineraryItems);
-      return (
-        <div className={styles.container}>
+    const itinerary = parseItinerary(result);
+    const allLocations = itinerary.flatMap((day, dayIndex) =>
+      day.Activities.map((activity, activityIndex) => ({
+        ...activity.Location,
+        dayIndex,
+        activityIndex,
+      }))
+    );
+    const mapCenter = {
+      lat:
+        allLocations.reduce((sum, loc) => sum + loc.lat, 0) /
+        allLocations.length,
+      lng:
+        allLocations.reduce((sum, loc) => sum + loc.lng, 0) /
+        allLocations.length,
+    };
+
+    const handleTextClick = (dayIndex, activityIndex) => {
+      const locationIndex = allLocations.findIndex(
+        (loc) => loc.dayIndex === dayIndex && loc.activityIndex === activityIndex
+      );
+      setOpenInfoWindow(locationIndex);
+    };
+
+    return (
+      <div className={styles.container}>
         <h1>Your Travel Itinerary</h1>
         <LoadScript googleMapsApiKey={API_KEY}>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             zoom={12}
-            center={center}
+            center={mapCenter}
           >
-            {locations.map((location) => (
+            {allLocations.map((location, index) => (
               <Marker
-                key={location.id}
-                position={location.position}
-                title={location.name}
-              />
+                key={index}
+                position={location}
+                onClick={() => setOpenInfoWindow(index)}
+              >
+                {openInfoWindow === index && (
+                  <InfoWindow onCloseClick={() => setOpenInfoWindow(-1)}>
+                    <div>
+                      {(() => {
+                        const activity = findActivityByLocation(
+                          location,
+                          itinerary
+                        );
+                        return (
+                          <>
+                            <h4>{activity.Activity}</h4>
+                            <p>{activity.Description}</p>
+                          </>
+                        );
+                      })()}
+                    </div>
+                  </InfoWindow>
+                )}
+              </Marker>
             ))}
           </GoogleMap>
         </LoadScript>
-        <div className={styles.tiles}>{itineraryItems}</div>
+        <div className={styles.tiles}>
+          {itinerary.map((day, dayIndex) => (
+            <div key={dayIndex} className={styles.day}>
+              <h2>{day.Date}</h2>
+              <ul className={styles.itinerary}>
+                {day.Activities.map((activity, activityIndex) => (
+                  <li
+                    key={activityIndex}
+                    onClick={() => handleTextClick(dayIndex, activityIndex)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {activity.Time}: {activity.Activity}
+                    <br />
+                    {activity.Description}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
     );
   } else {
@@ -72,3 +132,4 @@ export default function Itinerary() {
     );
   }
 }
+
