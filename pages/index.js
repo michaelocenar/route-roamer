@@ -3,8 +3,11 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import styles from "./index.module.css";
 import Nav from "../components/Nav";
+import RotatingGlobe from "../components/RotatingGlobe";
+
 
 export default function Home() {
+  
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -71,8 +74,10 @@ export default function Home() {
       <Head>
         <title>Travel Itinerary Generator</title>
         <link rel="icon" href="/favicon.ico" />
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
       </Head>
 
+      <RotatingGlobe />
       <main className={styles.main}>
         <h3>Create your travel itinerary</h3>
         <form onSubmit={onSubmit}>

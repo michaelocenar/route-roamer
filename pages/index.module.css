@@ -39,6 +39,7 @@
 .main form {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   width: 320px;
 }
 .main input[type="text"] {
@@ -65,3 +66,13 @@
   font-weight: bold;
   margin-top: 40px;
 }
+
+.rotating-globe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 50%;
+  z-index: 0; 
+}
+
