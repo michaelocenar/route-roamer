@@ -14,7 +14,6 @@
   font-style: normal;
 }
 
-
 .main {
   display: flex;
   flex-direction: column;
@@ -40,34 +39,43 @@
   padding-left: 600px; 
   border-radius: 4px; 
   border: 4px;
+  color: whitesmoke;
+
 }
 .main input[type="text"] {
-  background: rgba(252, 252, 252, 0.739);
+  background: rgba(36, 40, 63, 0.739);
+  border-color: transparent;
   padding: 15px 16px;
   width: 450px;
-  border: 1px solid #6ca1ea;
   border-radius: 4px;
   margin-bottom: 24px;
-  outline-color: #6ca1ea;
+  color: whitesmoke;
+
 }
 
 .main input[type="date"] {
-  background: rgba(252, 252, 252, 0.739);
+  background: rgba(36, 40, 63, 0.739);
+  color: rgb(97, 98, 99);
   padding: 15px 16px;
   width: 450px;
-  border: 1px solid #6ca1ea;
+  border: 1px solid;
+  border-color: transparent;
   border-radius: 4px;
   margin-bottom: 24px;
-  outline-color: #6ca1ea;}
+  color: whitesmoke;
+
+}
 
 .main input[type="number"] {
-  background: rgba(252, 252, 252, 0.739);
+  background: rgba(36, 40, 63, 0.739);
   padding: 15px 16px;
   width: 450px;
-  border: 1px solid #6ca1ea;
+  border: 1px solid;
+  border-color: transparent;
   border-radius: 4px;
   margin-bottom: 24px;
-  outline-color: #6ca1ea;
+  color: whitesmoke;
+
 }
 
 .main input[type="submit"] {

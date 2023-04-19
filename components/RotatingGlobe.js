@@ -27,9 +27,9 @@ const Globe = () => {
 
       newMap.on('load', () => {
         newMap.setFog({
-          range: [0.8, 8],
+          range: [0.1, 6],
           color: '#dc9f9f',
-          'horizon-blend': 0.5,
+          'horizon-blend': 0.3,
           'high-color': '#245bde',
           'space-color': '#000000',
           'star-intensity': 0.15
