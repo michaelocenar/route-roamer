@@ -1,0 +1,9 @@
+.main,
+.fog {
+  range: 0.8, 8;
+  color: #dc9f9f;
+  horizon-blend: 0.5;
+  high-color: #6b5072;
+  space-color: #000000;
+  star-intensity: 0.15;
+}

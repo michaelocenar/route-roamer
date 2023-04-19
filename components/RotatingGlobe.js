@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 
+
 // Replace with your Mapbox access token
 mapboxgl.accessToken = 'pk.eyJ1IjoibmFtcmFhIiwiYSI6ImNsZ2xuZjFrdzFxaHEzbG1vNHRzcDZwY2IifQ.5eNER4emz4xPuuDwAQLfKA';
 
@@ -25,11 +26,19 @@ const Globe = () => {
       });
 
       newMap.on('load', () => {
-        newMap.setFog({}); // Set the default atmosphere style
+        newMap.setFog({
+          range: [0.8, 8],
+          color: '#dc9f9f',
+          'horizon-blend': 0.5,
+          'high-color': '#245bde',
+          'space-color': '#000000',
+          'star-intensity': 0.15
+        }); // Set the default atmosphere style
       });
 
       newMap.on('styledata', () => {
-        newMap.setFog({}); // Set the default atmosphere style
+        newMap.setFog({
+        }); // Set the default atmosphere style
       });
 
       newMap.on('click', handleMapClick, handleInteraction, handleInteractionComplete); // Attach the function to the 'click' event
@@ -104,92 +113,4 @@ const Globe = () => {
   }  
 
 export default Globe;
-
-// import React, { useState, useEffect, useRef } from 'react';
-// import mapboxgl from 'mapbox-gl';
-
-// // Replace with your Mapbox access token
-// mapboxgl.accessToken = 'pk.eyJ1IjoibmFtcmFhIiwiYSI6ImNsZ2xuZjFrdzFxaHEzbG1vNHRzcDZwY2IifQ.5eNER4emz4xPuuDwAQLfKA';
-
-// const Globe = () => {
-// const [map, setMap] = useState(null);
-// const [spinEnabled, setSpinEnabled] = useState(true);
-// const mapContainer = useRef(null);
-
-// // The following values can be changed to control rotation speed:
-// const secondsPerRevolution = 120;
-// const maxSpinZoom = 5;
-// const slowSpinZoom = 3;
-
-// useEffect(() => {
-// const initMap = () => {
-// const newMap = new mapboxgl.Map({
-// container: mapContainer.current,
-// style: 'mapbox://styles/mapbox/satellite-v9',
-// projection: 'globe',
-// zoom: 1.5,
-// center: [-90, 40],
-// });
-
-
-// newMap.on('load', () => {
-//     newMap.setFog({}); // Set the default atmosphere style
-//   });
-
-//   newMap.on('styledata', () => {
-//     newMap.setFog({}); // Set the default atmosphere style
-//   });
-
-//   setMap(newMap);
-// };
-
-// if (!map) {
-//   initMap();
-// } else {
-//   spinGlobe();
-// }
-
-// return () => map?.remove(); 
-// }, [map]);
-
-// const spinGlobe = () => {
-//   if (spinEnabled) {
-//     const zoom = map.getZoom();
-//     if (zoom < maxSpinZoom) {
-//       let distancePerSecond = 360 / secondsPerRevolution;
-//       if (zoom > slowSpinZoom) {
-//         // Slow spinning at higher zooms
-//         const zoomDif = (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
-//         distancePerSecond *= zoomDif;
-//       }
-//       const center = map.getCenter();
-//       center.lng -= distancePerSecond;
-//       // Smoothly animate the map over one second.
-//       // When this animation is complete, it calls a 'moveend' event.
-//       map.easeTo({ center, duration: 1000 / 60, easing: (n) => n });
-//     }
-//   }
-// };
-
-// const handleInteraction = () => {
-// if (spinEnabled) {
-// setSpinEnabled(false);
-// }
-// };
-
-// const handleInteractionComplete = () => {
-// if (!spinEnabled) {
-// setSpinEnabled(true);
-// spinGlobe();
-// }
-// };
-
-// return (
-// <div style={{ position: 'relative' }}>
-// <div ref={mapContainer} style={{ position: 'fixed', top: 0, bottom: 0, left: '-70%', width: '200%', zIndex: 1 }} onMouseDown={handleInteraction} onMouseUp={handleInteractionComplete} onMouseLeave={handleInteractionComplete} onTouchStart={handleInteraction} onTouchEnd={handleInteractionComplete} />
-// </div>
-// );
-// };
-
-// export default Globe;
 
