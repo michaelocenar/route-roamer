@@ -68,7 +68,7 @@ Include a label for each date ie Day 1, Day 2, etc.
         "Date": "Date of the activities",
         "Activities": [
           {
-            "Time": "Suggested time for the activity",
+            "Time": "Suggested time for the activity in 12-hour format",
             "Activity": "Activity name",
             "Location": {
               "lat": "Latitude of the activity in decimal format",

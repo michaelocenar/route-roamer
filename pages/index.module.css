@@ -42,6 +42,7 @@
   color: whitesmoke;
 }
 .main input[type="text"] {
+  color: whitesmoke;
   background: rgba(36, 40, 63, 0.739);
   border-color: transparent;
   padding: 15px 16px;
