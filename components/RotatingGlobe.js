@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import mapboxgl from 'mapbox-gl';
+import React, { useState, useEffect, useRef } from "react";
+import mapboxgl from "mapbox-gl";
+
+console.log("mapboxgl", mapboxgl);
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_API_KEY;
 
 
-// Replace with your Mapbox access token
-mapboxgl.accessToken = 'pk.eyJ1IjoibmFtcmFhIiwiYSI6ImNsZ2xuZjFrdzFxaHEzbG1vNHRzcDZwY2IifQ.5eNER4emz4xPuuDwAQLfKA';
 
 const Globe = () => {
   const [map, setMap] = useState(null);
@@ -19,29 +20,26 @@ const Globe = () => {
     const initMap = () => {
       const newMap = new mapboxgl.Map({
         container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/satellite-v9',
-        projection: 'globe',
+        style: "mapbox://styles/mapbox/satellite-v9",
+        projection: "globe",
         zoom: 1.5,
         center: [-90, 40],
       });
 
-      newMap.on('load', () => {
+      newMap.on("load", () => {
         newMap.setFog({
           range: [0.1, 6],
-          color: '#dc9f9f',
-          'horizon-blend': 0.3,
-          'high-color': '#245bde',
-          'space-color': '#000000',
-          'star-intensity': 0.15
-        }); // Set the default atmosphere style
+          color: "#dc9f9f",
+          "horizon-blend": 0.3,
+          "high-color": "#245bde",
+          "space-color": "#000000",
+          "star-intensity": 0.15,
+        });
       });
 
-      newMap.on('styledata', () => {
-        newMap.setFog({
-        }); // Set the default atmosphere style
+      newMap.on("styledata", () => {
+        newMap.setFog({});
       });
-
-      newMap.on('click', handleMapClick, handleInteraction, handleInteractionComplete); // Attach the function to the 'click' event
 
       setMap(newMap);
     };
@@ -54,7 +52,7 @@ const Globe = () => {
       }, 1000 / 60);
     }
 
-    return () => map?.remove(); 
+    return () => map?.remove();
   }, [map]);
 
   const spinGlobe = () => {
@@ -69,8 +67,6 @@ const Globe = () => {
         }
         const center = map.getCenter();
         center.lng -= distancePerSecond;
-        // Smoothly animate the map over one second.
-        // When this animation is complete, it calls a 'moveend' event.
         map.easeTo({ center, duration: 1000 / 60, easing: (n) => n });
       }
     }
@@ -78,17 +74,17 @@ const Globe = () => {
 
   const handleInteraction = () => {
     if (spinEnabled) {
-    setSpinEnabled(false);
+      setSpinEnabled(false);
     }
-    };
-    
-    const handleInteractionComplete = () => {
-      if (!spinEnabled) {
-        setSpinEnabled(true);
-        spinGlobe();
-      }
-    };
-    
+  };
+
+  const handleInteractionComplete = () => {
+    if (!spinEnabled) {
+      setSpinEnabled(true);
+      spinGlobe();
+    }
+  };
+
   const handleMapClick = (e) => {
     if (map && e.lngLat) {
       const { lng, lat } = e.lngLat;
@@ -97,20 +93,27 @@ const Globe = () => {
       // Add a marker at the clicked location
       new mapboxgl.Marker().setLngLat(location).addTo(map);
     }
-  }
+  };
 
   return (
-<div
-  ref={mapContainer}
-  style={{ position: 'fixed', top: 0, bottom: 0, left: '-74%', width: '200%', zIndex: -1}} 
-  onMouseDown={handleInteraction} 
-  onMouseUp={handleInteractionComplete} 
-  onMouseLeave={handleInteractionComplete} 
-  onTouchStart={handleInteraction} 
-  onTouchEnd={handleInteractionComplete}
-  onClick={handleMapClick} />
-  )
-  }  
+    <div
+      ref={mapContainer}
+      style={{
+        position: "fixed",
+        top: 0,
+        bottom: 0,
+        left: "-74%",
+        width: "200%",
+        zIndex: -1,
+      }}
+      onMouseDown={handleInteraction}
+      onMouseUp={handleInteractionComplete}
+      onMouseLeave={handleInteractionComplete}
+      onTouchStart={handleInteraction}
+      onTouchEnd={handleInteractionComplete}
+      onClick={handleMapClick}
+    />
+  );
+};
 
 export default Globe;
-

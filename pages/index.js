@@ -5,6 +5,7 @@ import styles from "./index.module.css";
 import Nav from "../components/Nav";
 import RotatingGlobe from "../components/RotatingGlobe";
 
+
 export default function Home() {
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -60,7 +61,7 @@ export default function Home() {
     <div>
       <Nav />
       <Head>
-        <title>Travel Itinerary Generator</title>
+        <title>ROUTE ROAMER</title>
       </Head>
       <div className={styles.background}>
         <RotatingGlobe />
