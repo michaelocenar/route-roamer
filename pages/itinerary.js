@@ -53,21 +53,21 @@ export default function Itinerary() {
   // console.log("lat", extractedData.lat); // Output: [49.3021, 49.2714, 49.2631, 49.2804, 49.2839]
   // console.log("lng", extractedData.lng); // Output: [-123.1401, -123.1241, -123.2485, -123.1147, -123.1093]
 
-  const activityArray = [];
+  // const activityArray = [];
 
-  modifiedResult.Itinerary.forEach((day) => {
-    day.Activities.forEach((activity) => {
-      const activityObj = {
-        time: activity.Time,
-        lat: activity.Location.lat,
-        lng: activity.Location.lng,
-        description: activity.Description,
-      };
-      activityArray.push(activityObj);
-    });
-  });
+  // modifiedResult.Itinerary.forEach((day) => {
+  //   day.Activities.forEach((activity) => {
+  //     const activityObj = {
+  //       time: activity.Time,
+  //       lat: activity.Location.lat,
+  //       lng: activity.Location.lng,
+  //       description: activity.Description,
+  //     };
+  //     activityArray.push(activityObj);
+  //   });
+  // });
 
-  console.log("activityArray", activityArray);
+  // console.log("activityArray", activityArray);
 
   /// END OF WIP CODE
 
@@ -136,30 +136,32 @@ export default function Itinerary() {
           </GoogleMap>
         </LoadScript>
         <div className={styles.tiles}>
-          {itinerary.map((day, dayIndex) => (
-            <div key={dayIndex} className={styles.day}>
-              <h2>{day.Date}</h2>
-              <ul className={styles.itinerary}>
-                {day.Activities.map((activity, activityIndex) => (
-                  <li key={activityIndex}>
-                    {activity.Time}:{" "}
-                    <a
-                      onClick={() =>
-                        handleTextClick(dayIndex, activityIndex)
-                      }
-                      style={{ cursor: "pointer", color: "blue" }}
-                    >
-                      {activity.Activity}
-                    </a>
-                    <br />
-                    {activity.Description}
-                  </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+        {itinerary.map((day, dayIndex) => (
+          <div key={dayIndex} className={styles.day}>
+            <h2>
+              Day {dayIndex + 1}: {day.Date || "No date provided"}
+            </h2>
+            <ul className={styles.itinerary}>
+              {day.Activities.map((activity, activityIndex) => (
+                <li key={activityIndex}>
+                  {activity.Time}:{" "}
+                  <a
+                    onClick={() =>
+                      handleTextClick(dayIndex, activityIndex)
+                    }
+                    style={{ cursor: "pointer", color: "blue" }}
+                  >
+                    {activity.Activity}
+                  </a>
+                  <br />
+                  {activity.Description}
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
+        ))}
+      </div>
+    </div>
       );
     } else {
       return (
