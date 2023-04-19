@@ -101,7 +101,7 @@ export default function Itinerary() {
     return (
       <div className={styles.container}>
         <h1>Your Travel Itinerary</h1>
-        <LoadScript googleMapsApiKey={API_KEY} libraries={["places"]}>
+        <LoadScript googleMapsApiKey={API_KEY}>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             zoom={12}
