@@ -71,3 +71,27 @@
 .itinerary li:last-of-type:before {
   display: none;
 }
+
+.info-window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-window img {
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.info-window h4 {
+  margin: 0;
+  margin-bottom: 4px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.info-window p {
+  margin: 0;
+  font-size: 14px;
+}
