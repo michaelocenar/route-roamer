@@ -7,63 +7,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import React, { useState, useRef } from "react";
-import { parseItinerary, findActivityByLocation } from "./itineraryHelpers";
-
-const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-
-const mapContainerStyle = {
-  width: "100%",
-  height: "400px",
-};
-
-const googleMapsLibraries = ["places"];
-
-function getPlaceId(lat, lng) {
-  const geocoder = new window.google.maps.Geocoder();
-  const latlng = new window.google.maps.LatLng(lat, lng);
-  return new Promise((resolve, reject) => {
-    geocoder.geocode({ location: latlng }, (results, status) => {
-      if (status === "OK") {
-        if (results[0]) {
-          resolve(results[0].place_id);
-        } else {
-          reject("No results found");
-        }
-      } else {
-        reject(`Geocoder failed due to: ${status}`);
-      }
-    });
-  });
-}
-
-const fetchPlaceDetails = async (lat, lng) => {
-  const map = mapRef.current;
-  const service = new window.google.maps.places.PlacesService(map);
-  const request = {
-    location: new window.google.maps.LatLng(lat, lng),
-    radius: 1000,
-    type: ["point_of_interest"],
-  };
-  service.nearbySearch(request, (results, status) => {
-    if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-      if (results[0]) {
-        const placeId = results[0].place_id;
-        const request = {
-          placeId,
-          fields: ["name", "formatted_address", "geometry", "rating"],
-        };
-        service.getDetails(request, (result, status) => {
-          console.log("Place details result:", result);
-          console.log("Place details status:", status);
-          if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-            setPlaceDetails(result);
-          }
-        });
-      }
-    }
-  });
-};
-
+import { parseItinerary, getPlaceId, API_KEY, mapContainerStyle, googleMapsLibraries } from "./itineraryHelpers";
 
 export default function Itinerary() {
   console.log("Itinerary component rendered");
