@@ -1,0 +1,30 @@
+{
+  "items": {
+    "bootstrap": [
+      {
+        "id": 1,
+        "title": "Madrid",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/44/Plaza_Mayor_de_Madrid_06.jpg",
+        "docs": "https://getbootstrap.com/docs/4.0/components/carousel/"
+      },
+      {
+        "id": 2,
+        "title": "Cape Town",
+        "imageUrl": "https://cdn.britannica.com/41/75841-050-FAAE44F0/Table-Mountain-Cape-Town-Western-Bay-South.jpg",
+        "docs": "https://getbootstrap.com/docs/4.0/components/carousel/"
+      },
+      {
+        "id": 3,
+        "title": "Rio de Janiero",
+        "imageUrl": "https://www.travelandleisure.com/thmb/q02YNlm2ioHoWY78Ipl9WmRcC1M=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/rio-de-janeiro-RIOTG0721-c59c5e2f3a354e798587d5ef925b23e3.jpg",
+        "docs": "https://getbootstrap.com/docs/4.0/components/carousel/"
+      },
+      {
+        "id": 4,
+        "title": "Cairo",
+        "imageUrl": "https://www.ytravelblog.com/wp-content/uploads/2012/09/Cairo-egypt-camels-and-pyramids.jpg",
+        "docs": "https://getbootstrap.com/docs/4.0/components/carousel/"
+      }
+    ]
+  }
+}

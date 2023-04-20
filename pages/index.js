@@ -6,6 +6,7 @@ import Nav from "../components/Nav";
 import RotatingGlobe from "../components/RotatingGlobe";
 
 
+
 export default function Home() {
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState("");

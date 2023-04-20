@@ -1,0 +1,26 @@
+.carouselContainer {
+  width: 80%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 200px;
+}
+
+/* Start Bootstrap carousel */
+.itemP {
+  height: 30rem;
+}
+.itemP > img {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+
+.caption {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+}
+
+.caption h3 {
+  font-size: 35px;
+  color: rgb(255, 255, 255);
+}
