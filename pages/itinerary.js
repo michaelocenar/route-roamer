@@ -6,7 +6,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { parseItinerary, findActivityByLocation } from "./itineraryHelpers";
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -16,12 +16,34 @@ const mapContainerStyle = {
   height: "400px",
 };
 
+const googleMapsLibraries = ["places"];
+
+async function getPlaceId(lat, lng) {
+  const response = await fetch(
+    `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=50&key=${API_KEY}`
+  );
+  const data = await response.json();
+  if (data.results && data.results[0]) {
+    return data.results[0].place_id;
+  }
+  return null;
+}
+
+async function fetchPlaceDetails(placeId) {
+  const response = await fetch(
+    `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,formatted_address,rating&key=${API_KEY}`
+  );
+  const data = await response.json();
+  return data.result;
+  }
+
 export default function Itinerary() {
+  console.log("Itinerary component rendered");
   const router = useRouter();
   const { result } = router.query;
   console.log("result:", result);
 
-  const modifiedResult = JSON.parse(result);
+  // const modifiedResult = JSON.parse(result);
   // console.log("##01modifiedResult", modifiedResult);
   // console.log("##02modifiedResult", modifiedResult["Itinerary"]);
   // console.log("##03modifiedResult", modifiedResult["Itinerary"][0]["Activities"][0]["Activity"]);
@@ -72,8 +94,19 @@ export default function Itinerary() {
   /// END OF WIP CODE
 
   const [openInfoWindow, setOpenInfoWindow] = useState(-1);
+  const [placeDetails, setPlaceDetails] = useState(null);
+  const mapRef = useRef();
+
+  const onLoad = (map) => {
+    mapRef.current = map;
+  };
+
+  const onUnmount = () => {
+    mapRef.current = null;
+  };
 
   if (typeof result === "string") {
+    console.log("Result is a string");
     const itinerary = parseItinerary(result);
     const allLocations = itinerary.flatMap((day, dayIndex) =>
       day.Activities.map((activity, activityIndex) => ({
@@ -98,36 +131,62 @@ export default function Itinerary() {
       setOpenInfoWindow(locationIndex);
     };
 
+    const fetchPlaceDetails = async (placeId) => {
+      const map = mapRef.current;
+      const service = new window.google.maps.places.PlacesService(map);
+
+      const request = {
+        placeId,
+        fields: ["name", "formatted_address", "geometry", "rating"],
+      };
+
+      service.getDetails(request, (result, status) => {
+        console.log("Place details result:", result); 
+        console.log("Place details status:", status);
+        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+          setPlaceDetails(result);
+        }
+      });
+    };
+
+    const onMarkerClick = async (index, lat, lng) => {
+      setOpenInfoWindow(index);
+      const placeId = await getPlaceId(lat, lng);
+      if (placeId) {
+        const placeDetails = await fetchPlaceDetails(placeId);
+        setPlaceDetails(placeDetails);
+      }
+    };
+    
     return (
       <div className={styles.container}>
         <h1>Your Travel Itinerary</h1>
-        <LoadScript googleMapsApiKey={API_KEY}  libraries={["places"]}>
+        <LoadScript googleMapsApiKey={API_KEY}  libraries={googleMapsLibraries}>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             zoom={12}
             center={mapCenter}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
           >
             {allLocations.map((location, index) => (
               <Marker
                 key={index}
                 position={location}
-                onClick={() => setOpenInfoWindow(index)}
+                onClick={() => onMarkerClick(index, location.placeId)}
               >
                 {openInfoWindow === index && (
                   <InfoWindow onCloseClick={() => setOpenInfoWindow(-1)}>
                     <div>
-                      {(() => {
-                        const activity = findActivityByLocation(
-                          location,
-                          itinerary
-                        );
-                        return (
-                          <>
-                            <h4>{activity.Activity}</h4>
-                            <p>{activity.Description}</p>
-                          </>
-                        );
-                      })()}
+                      {placeDetails ? (
+                        <>
+                          <h4>{placeDetails.name}</h4>
+                          <p>{placeDetails.formatted_address}</p>
+                          <p>Rating: {placeDetails.rating}</p>
+                        </>
+                      ) : (
+                        <p>Loading place details...</p>
+                      )}
                     </div>
                   </InfoWindow>
                 )}
@@ -164,6 +223,7 @@ export default function Itinerary() {
     </div>
       );
     } else {
+      console.log("Result is not a string");
       return (
         <div className={styles.container}>
           <h1>Error: No itinerary data found.</h1>
