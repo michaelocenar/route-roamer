@@ -149,15 +149,28 @@ export default function Itinerary() {
       });
     };
 
-    const onMarkerClick = async (index, lat, lng) => {
+    const onMarkerClick = (index, lat, lng) => {
       setOpenInfoWindow(index);
-      const placeId = await getPlaceId(lat, lng);
-      if (placeId) {
-        const placeDetails = await fetchPlaceDetails(placeId);
-        setPlaceDetails(placeDetails);
-      }
-    };
+      const map = mapRef.current;
+      const service = new window.google.maps.places.PlacesService(map);
     
+      const request = {
+        location: { lat, lng },
+        radius: 50,
+        fields: ["place_id"],
+      };
+    
+      service.nearbySearch(request, (results, status) => {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+          const placeId = results[0].place_id;
+          if (placeId) {
+            const placeDetails = fetchPlaceDetails(placeId);
+            setPlaceDetails(placeDetails);
+          }
+        }
+      });
+    };
+
     return (
       <div className={styles.container}>
         <h1>Your Travel Itinerary</h1>
