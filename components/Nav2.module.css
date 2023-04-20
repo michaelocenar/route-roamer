@@ -1,0 +1,25 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  padding: 10px;
+  box-shadow: none;
+  color: rgb(1, 14, 25);
+}
+
+.nav h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.nav a {
+  color: rgb(41, 22, 74);
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.nav a:hover {
+  color: rgb(4, 52, 2);
+}
