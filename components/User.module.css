@@ -1,6 +1,13 @@
 .userImage {
   width: 300px;
   height: 300px;
-  margin-top: 50px;
-  margin-left: 400px;
+}
+
+.User {
+  display: flex;
+  justify-content: center;
+}
+
+.userText {
+  padding-top: 50px;
 }

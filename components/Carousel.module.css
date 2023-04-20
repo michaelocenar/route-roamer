@@ -1,18 +1,17 @@
 .carouselContainer {
   width: 80%;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  margin-left: 200px;
 }
 
-/* Start Bootstrap carousel */
 .itemP {
   height: 30rem;
+  overflow: hidden;
+  border-radius: 50px;
 }
 .itemP > img {
   width: 100%;
   object-fit: cover;
   height: 100%;
+  border-radius: 50px;
 }
 
 .caption {
