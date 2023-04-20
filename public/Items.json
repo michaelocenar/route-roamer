@@ -1,0 +1,26 @@
+{
+  "items": {
+    "bootstrap": [
+      {
+        "id": 3,
+        "title": "ISTANBUL - 2 Day",
+        "imageUrl": "/tile-images/Istanbul.jpg"
+      },
+      {
+        "id": 4,
+        "title": "TOKYO",
+        "imageUrl": "/tile-images/tokyo.jpeg"
+      },
+      {
+        "id": 1,
+        "title": "PARIS",
+        "imageUrl": "/tile-images/paris.jpeg"
+      },
+      {
+        "id": 2,
+        "title": "AMSTERDAM",
+        "imageUrl": "/tile-images/Amsterdam.jpg"
+      }
+    ]
+  }
+}
