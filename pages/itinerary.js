@@ -1,11 +1,6 @@
 import { useRouter } from "next/router";
 import styles from "./itinerary.module.css";
-import {
-  GoogleMap,
-  LoadScript,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import React, { useState, useRef } from "react";
 import { parseItinerary, getPlaceId, API_KEY, mapContainerStyle, googleMapsLibraries } from "./itineraryHelpers";
 
@@ -160,19 +155,22 @@ export default function Itinerary() {
               >
                 {console.log("Marker location:", location)}
                 {openInfoWindow === index && (
-                  <InfoWindow onCloseClick={() => setOpenInfoWindow(-1)}>
-                    <div>
-                      {placeDetails ? (
-                        <>
-                          <h4>{placeDetails.name}</h4>
-                          <p>{placeDetails.formatted_address}</p>
-                          <p>Rating: {placeDetails.rating}</p>
-                        </>
-                      ) : (
-                        <p>Loading place details...</p>
-                      )}
+                  <InfoWindow onCloseClick={() => setOpenInfoWindow(-1)} options={{ pixelOffset: new window.google.maps.Size(0, -35), maxWidth: 200 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    {placeDetails && placeDetails.photos && placeDetails.photos.length > 0 && (
+                      <img
+                        src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${placeDetails.photos[0].photo_reference}&key=${API_KEY}`}
+                        alt={placeDetails.name}
+                        style={{ marginBottom: '8px', borderRadius: '4px' }}
+                      />
+                    )}
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                      <h4 style={{ margin: 0, marginBottom: '4px', fontWeight: 'bold', fontSize: '16px' }}>{placeDetails ? placeDetails.name : 'Loading...'}</h4>
+                      <p style={{ margin: 0, fontSize: '14px' }}>{placeDetails ? placeDetails.formatted_address : 'Loading...'}</p>
+                      <p style={{ margin: 0, fontSize: '14px' }}>Rating: {placeDetails ? placeDetails.rating : 'Loading...'}</p>
                     </div>
-                  </InfoWindow>
+                  </div>
+                </InfoWindow>
                 )}
               </Marker>
             ))}
