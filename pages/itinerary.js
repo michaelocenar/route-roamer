@@ -4,64 +4,16 @@ import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/ap
 import React, { useState, useRef } from "react";
 import { parseItinerary, getPlaceId, API_KEY, mapContainerStyle, googleMapsLibraries } from "./itineraryHelpers";
 
+const markerColors = ["red", "blue", "green", "yellow", "orange", "purple", "pink", "brown", "gray", "black"];
+
 export default function Itinerary() {
   console.log("Itinerary component rendered");
   const router = useRouter();
   const { result } = router.query;
-  console.log("result:", result);
-
-  // const modifiedResult = JSON.parse(result);
-  // console.log("##01modifiedResult", modifiedResult);
-  // console.log("##02modifiedResult", modifiedResult["Itinerary"]);
-  // console.log("##03modifiedResult", modifiedResult["Itinerary"][0]["Activities"][0]["Activity"]);
-  // console.log("##04modifiedResult", modifiedResult["Itinerary"][0]["Activities"][1]["Activity"]);
-
-  // function extractData(result) {
-  //   const modifiedResult = JSON.parse(result);
-  //   const time = [];
-  //   const activity = [];
-  //   const description = [];
-  //   const lat = [];
-  //   const lng = [];
-
-  //   modifiedResult.Itinerary[0].Activities.forEach(item => {
-  //     time.push(item.Time);
-  //     activity.push(item.Activity);
-  //     description.push(item.Description);
-  //     lat.push(item.Location.lat);
-  //     lng.push(item.Location.lng);
-  //   });
-
-  //   return { time, activity, lat, lng, description };
-  // }
-
-  // const extractedData = extractData(result);
-  // console.log("time", extractedData.time); // Output: ["9AM", "11AM", "1PM", "3PM", "5PM"]
-  // console.log("activity", extractedData.activity); // Output: ["Stanley Park Seawall", "Granville Island Public Market", "Museum of Anthropology", "Vancouver Lookout", "Gastown"]
-  // console.log("description", extractedData.description);
-  // console.log("lat", extractedData.lat); // Output: [49.3021, 49.2714, 49.2631, 49.2804, 49.2839]
-  // console.log("lng", extractedData.lng); // Output: [-123.1401, -123.1241, -123.2485, -123.1147, -123.1093]
-
-  // const activityArray = [];
-
-  // modifiedResult.Itinerary.forEach((day) => {
-  //   day.Activities.forEach((activity) => {
-  //     const activityObj = {
-  //       time: activity.Time,
-  //       lat: activity.Location.lat,
-  //       lng: activity.Location.lng,
-  //       description: activity.Description,
-  //     };
-  //     activityArray.push(activityObj);
-  //   });
-  // });
-
-  // console.log("activityArray", activityArray);
-
-  /// END OF WIP CODE
-
   const [openInfoWindow, setOpenInfoWindow] = useState(-1);
   const [placeDetails, setPlaceDetails] = useState(null);
+  const [destination, setDestination] = useState("Your Travel Itinerary");
+
   const mapRef = useRef();
 
   const onLoad = (map) => {
@@ -113,6 +65,10 @@ export default function Itinerary() {
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
           setPlaceDetails(result);
         }
+        // Set the destination name
+        if (!destination || destination === "Your Travel Itinerary") {
+          setDestination(`Your trip to ${result.name}`);
+        }
       });
     };
 
@@ -138,7 +94,7 @@ export default function Itinerary() {
 
     return (
       <div className={styles.container}>
-        <h1>Your Travel Itinerary</h1>
+        <h1>{destination}</h1>
         {typeof result === "string" ? (
           <LoadScript googleMapsApiKey={API_KEY} libraries={googleMapsLibraries}>
             <GoogleMap
@@ -153,6 +109,9 @@ export default function Itinerary() {
                   key={index}
                   position={location}
                   onClick={() => onMarkerClick(index, location)}
+                  icon={{
+                    url: `http://maps.google.com/mapfiles/ms/icons/${markerColors[location.dayIndex % markerColors.length]}-dot.png`,
+                  }}
                 >
                   {console.log("Marker location:", location)}
                   {openInfoWindow === index && (
