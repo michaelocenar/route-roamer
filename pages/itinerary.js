@@ -18,24 +18,52 @@ const mapContainerStyle = {
 
 const googleMapsLibraries = ["places"];
 
-async function getPlaceId(lat, lng) {
-  const response = await fetch(
-    `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=50&key=${API_KEY}`
-  );
-  const data = await response.json();
-  if (data.results && data.results[0]) {
-    return data.results[0].place_id;
-  }
-  return null;
+function getPlaceId(lat, lng) {
+  const geocoder = new window.google.maps.Geocoder();
+  const latlng = new window.google.maps.LatLng(lat, lng);
+  return new Promise((resolve, reject) => {
+    geocoder.geocode({ location: latlng }, (results, status) => {
+      if (status === "OK") {
+        if (results[0]) {
+          resolve(results[0].place_id);
+        } else {
+          reject("No results found");
+        }
+      } else {
+        reject(`Geocoder failed due to: ${status}`);
+      }
+    });
+  });
 }
 
-async function fetchPlaceDetails(placeId) {
-  const response = await fetch(
-    `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,formatted_address,rating&key=${API_KEY}`
-  );
-  const data = await response.json();
-  return data.result;
-  }
+const fetchPlaceDetails = async (lat, lng) => {
+  const map = mapRef.current;
+  const service = new window.google.maps.places.PlacesService(map);
+  const request = {
+    location: new window.google.maps.LatLng(lat, lng),
+    radius: 1000,
+    type: ["point_of_interest"],
+  };
+  service.nearbySearch(request, (results, status) => {
+    if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+      if (results[0]) {
+        const placeId = results[0].place_id;
+        const request = {
+          placeId,
+          fields: ["name", "formatted_address", "geometry", "rating"],
+        };
+        service.getDetails(request, (result, status) => {
+          console.log("Place details result:", result);
+          console.log("Place details status:", status);
+          if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+            setPlaceDetails(result);
+          }
+        });
+      }
+    }
+  });
+};
+
 
 export default function Itinerary() {
   console.log("Itinerary component rendered");
@@ -149,26 +177,24 @@ export default function Itinerary() {
       });
     };
 
-    const onMarkerClick = (index, lat, lng) => {
+    const onMarkerClick = async (index, location) => {
+      console.log("onMarkerClick called with index:", index, "location:", location);
       setOpenInfoWindow(index);
-      const map = mapRef.current;
-      const service = new window.google.maps.places.PlacesService(map);
-    
-      const request = {
-        location: { lat, lng },
-        radius: 50,
-        fields: ["place_id"],
-      };
-    
-      service.nearbySearch(request, (results, status) => {
-        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-          const placeId = results[0].place_id;
+      try {
+        if (location && location.lat && location.lng) {
+          const placeId = await getPlaceId(location.lat, location.lng);
+          console.log("placeId:", placeId);
           if (placeId) {
-            const placeDetails = fetchPlaceDetails(placeId);
+            const placeDetails = await fetchPlaceDetails(placeId);
+            console.log("placeDetails:", placeDetails);
             setPlaceDetails(placeDetails);
           }
+        } else {
+          console.error("Invalid location:", location);
         }
-      });
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     return (
@@ -186,8 +212,9 @@ export default function Itinerary() {
               <Marker
                 key={index}
                 position={location}
-                onClick={() => onMarkerClick(index, location.placeId)}
+                onClick={() => onMarkerClick(index, location)}
               >
+                {console.log("Marker location:", location)}
                 {openInfoWindow === index && (
                   <InfoWindow onCloseClick={() => setOpenInfoWindow(-1)}>
                     <div>
