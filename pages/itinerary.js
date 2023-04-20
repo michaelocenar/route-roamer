@@ -81,7 +81,6 @@ export default function Itinerary() {
           console.log("placeId:", placeId);
           if (placeId) {
             const placeDetails = await fetchPlaceDetails(placeId);
-            console.log("placeDetails:", placeDetails);
             setPlaceDetails(placeDetails);
           }
         } else {
