@@ -6,15 +6,15 @@ const tilesData = [
     id: 1,
     src: '/tile-images/Amsterdam.jpg',
     alt: 'Example 1',
-    href: '/example1',
+    href: '/profile',
     text: 'AMSTERDAM',
   },
   {
     id: 2,
     src: '/tile-images/Istanbul.jpg',
     alt: 'Example 2',
-    href: '/example2',
-    text: 'ISTANBUL',
+    href: '/itinerary',
+    text: 'ISTANBUL - 2 Days',
   },
   {
     id: 3,
