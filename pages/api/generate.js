@@ -61,14 +61,14 @@ function generatePrompt(destination, startDate, endDate, budget, preferences) {
   const { activities, accommodation, transportation } = preferences;
 
   return `Create a suggested itinerary for a trip to ${destination} from ${startDate} to ${endDate} with a budget of $${budget}. Return the itinerary in JSON format using the following structure:
-Include a label for each date ie Day 1, Day 2, etc.
+Include a label for each date i.e. Day 1, Day 2, etc.
   {
     "Itinerary": [
       {
         "Date": "Date of the activities",
         "Activities": [
           {
-            "Time": "Suggested time for the activity",
+            "Time": "Suggested time for the activity in 12-hour format",
             "Activity": "Activity name",
             "Location": {
               "lat": "Latitude of the activity in decimal format",

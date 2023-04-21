@@ -1,0 +1,25 @@
+.carouselContainer {
+  width: 80%;
+}
+
+.itemP {
+  height: 30rem;
+  overflow: hidden;
+  border-radius: 50px;
+}
+.itemP > img {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+  border-radius: 50px;
+}
+
+.caption {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+}
+
+.caption h3 {
+  font-size: 35px;
+  color: rgb(255, 255, 255);
+}
