@@ -1,4 +1,4 @@
-import routes from '../routes';
+import userRoutes from '../userRoutes';
 import db from '../db';
 
 export default function Users({ users }) {

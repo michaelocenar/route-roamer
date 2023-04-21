@@ -1,23 +1,4 @@
-// import routes from '../routes';
-// import db from '../db';
-
-// export default function ItineraryActivities({ itineraryActivities }) {
-//   return (
-//     <ul>
-//       {itineraryActivities.map(activity => (
-//         <li key={activity.id}>
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// }
-
-// export async function getServerSideProps() {
-//   const { rows } = await db.query('SELECT * FROM itinerary_activities');
-//   return { props: { itineraryActivities: rows } };
-// }
-
-import routes from '../routes';
+import activityRoutes from '../activityRoutes';
 import db from '../db';
 
 export default function Itinerary({ activities }) {
@@ -26,7 +7,7 @@ export default function Itinerary({ activities }) {
       {activities.map(activity => (
         <li key={activity.id}>
           <h2>{activity.label}</h2>
-          <p>{activity.date}</p>
+          {/* <p>{new Date(activity.date).toJSON()}</p> */}
           <p>{activity.activity}</p>
           <p>{activity.time}</p>
           <p>{activity.lat}</p>
@@ -38,7 +19,8 @@ export default function Itinerary({ activities }) {
   );
 }
 
+
 export async function getServerSideProps() {
-  const { rows } = await db.query('SELECT * FROM itinerary_activities');
+  const { rows } = await db.query('SELECT itinerary_id, label, activity, time, lat, lng, description, location FROM itinerary_activities');
   return { props: { activities: rows } };
 }
