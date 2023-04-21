@@ -45,10 +45,12 @@ export default function Itinerary() {
     };
 
     const handleTextClick = (dayIndex, activityIndex) => {
+      // console.log("day and activity index:", dayIndex, activityIndex);
       const locationIndex = allLocations.findIndex(
         (loc) => loc.dayIndex === dayIndex && loc.activityIndex === activityIndex
       );
       setOpenInfoWindow(locationIndex);
+      // set place details for this so that it handles in the same way as onmarker click
     };
 
     const fetchPlaceDetails = async (placeId) => {
@@ -71,6 +73,7 @@ export default function Itinerary() {
           setDestination(`Your trip to ${result.name}`);
         }
       });
+      // make useEffect for this 
     };
 
     const onMarkerClick = async (index, location) => {
@@ -149,18 +152,17 @@ export default function Itinerary() {
                     <ul className={styles.itinerary}>
                       {day.Activities.map((activity, activityIndex) => (
                         <li key={activityIndex}>
-                          {activity.Time}:{" "}
+                        <div className="timeAndActivity">
+                          <span className="time">{activity.Time}:</span>
                           <a
-                            onClick={() =>
-                              handleTextClick(dayIndex, activityIndex)
-                            }
-                            style={{ cursor: "pointer", color: "#62a9ff" }}
+                            onClick={() => handleTextClick(dayIndex, activityIndex)}
+                            className={styles.locationLink}
                           >
                             {activity.Activity}
                           </a>
-                          <br />
-                          {activity.Description}
-                        </li>
+                        </div>
+                        <div className="description">{activity.Description}</div>
+                      </li>
                       ))}
                     </ul>
                   </div>
