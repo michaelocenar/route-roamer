@@ -154,7 +154,7 @@ export default function Itinerary() {
                             onClick={() =>
                               handleTextClick(dayIndex, activityIndex)
                             }
-                            style={{ cursor: "pointer", color: "blue" }}
+                            style={{ cursor: "pointer", color: "#62a9ff" }}
                           >
                             {activity.Activity}
                           </a>
