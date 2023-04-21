@@ -37,7 +37,7 @@ module.exports = async function(req, res) {
       model: "text-davinci-003",
       prompt: generatePrompt(destination, startDate, endDate, budget, preferences),
       temperature: 0.7,
-      max_tokens: 2000,
+      max_tokens: 3700,
     });
 
     console.log("Completion data:", completion.data);

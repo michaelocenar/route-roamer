@@ -22,6 +22,7 @@ export default function Itinerary() {
   };
 
   if (typeof result === "string") {
+    console.log("result", result);
     console.log("Result is a string");
     const itinerary = parseItinerary(result);
     const allLocations = itinerary.flatMap((day, dayIndex) =>
@@ -47,6 +48,50 @@ export default function Itinerary() {
       setOpenInfoWindow(locationIndex);
     };
 
+<<<<<<< HEAD
+=======
+    const fetchPlaceDetails = async (placeId) => {
+      const map = mapRef.current;
+      const service = new window.google.maps.places.PlacesService(map);
+
+      const request = {
+        placeId,
+        fields: ["name", "formatted_address", "geometry", "rating"],
+      };
+
+      service.getDetails(request, (result, status) => {
+        console.log("Place details result:", result);
+        console.log("Place details status:", status);
+        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+          setPlaceDetails(result);
+        }
+        // Set the destination name
+        if (!destination || destination === "Your Travel Itinerary") {
+          setDestination(`Your trip to ${result.name}`);
+        }
+      });
+    };
+
+    const onMarkerClick = async (index, location) => {
+      console.log("onMarkerClick called with index:", index, "location:", location);
+      setOpenInfoWindow(index);
+      try {
+        if (location && location.lat && location.lng) {
+          const placeId = await getPlaceId(location.lat, location.lng);
+          console.log("placeId:", placeId);
+          if (placeId) {
+            const placeDetails = await fetchPlaceDetails(placeId);
+            setPlaceDetails(placeDetails);
+          }
+        } else {
+          console.error("Invalid location:", location);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+>>>>>>> origin
     return (
       <div className={styles.darkModeWrapper}>
         <div className={styles.container}>
@@ -109,6 +154,7 @@ export default function Itinerary() {
       <div className={styles.container}>
         <h1>Error: No itinerary data found.</h1>
       </div>
+<<<<<<< HEAD
     )}
   </div>
 </div>
@@ -123,3 +169,15 @@ export default function Itinerary() {
       );
     }
   } 
+=======
+    );
+  } else {
+    console.log("Result is not a string");
+    return (
+      <div className={styles.container}>
+        <h1>Error: No itinerary data found.</h1>
+      </div>
+    );
+  }
+}
+>>>>>>> origin
