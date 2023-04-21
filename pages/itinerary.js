@@ -143,22 +143,22 @@ export default function Itinerary() {
                           </a>
                         </div>
                         <div className="description">{activity.Description}</div>
-                  </li>
-                  ))}
-                </ul>
+                      </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
-            ))}
+              </LoadScript>
+              ) : (
+          <div className={styles.container}>
+            <h1>Error: No itinerary data found.</h1>
           </div>
-          </LoadScript>
-          ) : (
-      <div className={styles.container}>
-        <h1>Error: No itinerary data found.</h1>
+        )}
       </div>
-<<<<<<< HEAD
-    )}
+<<<<<<<<< Temporary merge branch 1
+    </div>
   </div>
-</div>
-</div>
 );   
     } else {
       console.log("Result is not a string");
@@ -168,8 +168,8 @@ export default function Itinerary() {
         </div>
       );
     }
-  } 
-=======
+  }
+=========
     );
   } else {
     console.log("Result is not a string");
@@ -180,4 +180,4 @@ export default function Itinerary() {
     );
   }
 }
->>>>>>> origin
+>>>>>>>>> Temporary merge branch 2
