@@ -108,7 +108,7 @@ export default function Itinerary() {
       };
 
       service.getDetails(request, (result, status) => {
-        console.log("Place details result:", result); 
+        console.log("Place details result:", result);
         console.log("Place details status:", status);
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
           setPlaceDetails(result);
@@ -209,13 +209,13 @@ export default function Itinerary() {
           </div>
         )}
       </div>
-    );    
-    } else {
-      console.log("Result is not a string");
-      return (
-        <div className={styles.container}>
-          <h1>Error: No itinerary data found.</h1>
-        </div>
-      );
-    }
+    );
+  } else {
+    console.log("Result is not a string");
+    return (
+      <div className={styles.container}>
+        <h1>Error: No itinerary data found.</h1>
+      </div>
+    );
   }
+}
