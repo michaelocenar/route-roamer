@@ -18,6 +18,7 @@
   display: flex;
   flex-direction: column;
   height: 80vh;
+  background-color: #1f2125;
 }
 
 .title {
@@ -25,7 +26,7 @@
   font-size: 40px;
   line-height: 48px;
   font-weight: bold;
-  color: #202123;
+  color: #ffffff;
   margin: 0;
   padding: 0;
 }
@@ -50,6 +51,7 @@
   order: 1;
   flex: 1;
   height: 80%;
+  background-color: #2b2e35;
   border: solid 3px #4caf50; 
   overflow: scroll;
   border-radius: 20px;
@@ -59,6 +61,7 @@
 .day {
   margin-top: 40px;
   text-align: center;
+  color: #ffffff;
 }
 
 .itinerary {
@@ -66,7 +69,7 @@
   padding: 0;
   font-size: 24px;
   line-height: 1.5;
-  color: #353740;
+  color: #d8d8d8;
   font-family: "ColfaxAI", Helvetica, sans-serif;
 }
 
@@ -98,4 +101,19 @@
 
 .itinerary li:last-of-type:before {
   display: none;
+}
+
+.itinerary a {
+  color: #62d3a3;
+  text-decoration: underline;
+}
+
+.darkModeWrapper {
+  background-color: #1f2125;
+  min-height: 100vh;
+}
+
+.itinerary_content__3mmbU {
+  background-color: #1f2125;
+  min-height: 100vh;
 }

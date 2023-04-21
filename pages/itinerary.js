@@ -93,11 +93,12 @@ export default function Itinerary() {
     };
 
     return (
-      <div className={styles.container}>
-        <Nav2 />
-        <h1 className={styles.title}>{destination}</h1>
-        <div className={styles.content}>
-          {typeof result === "string" ? (
+      <div className={styles.darkModeWrapper}>
+        <div className={styles.container}>
+          <Nav2 />
+          <h1 className={styles.title}>{destination}</h1>
+          <div className={styles.content}>
+            {typeof result === "string" ? (
             <LoadScript googleMapsApiKey={API_KEY} libraries={googleMapsLibraries}>
               <div className={styles.map}>
                 <GoogleMap
@@ -165,15 +166,16 @@ export default function Itinerary() {
                   </div>
                 ))}
               </div>
-            </LoadScript>
-          ) : (
-            <div className={styles.container}>
-              <h1>Error: No itinerary data found.</h1>
-            </div>
-          )}
-        </div>
+              </LoadScript>
+              ) : (
+          <div className={styles.container}>
+            <h1>Error: No itinerary data found.</h1>
+          </div>
+        )}
       </div>
-    );    
+    </div>
+  </div>
+);   
     } else {
       console.log("Result is not a string");
       return (
