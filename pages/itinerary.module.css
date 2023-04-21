@@ -17,7 +17,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 80vh;
 }
 
 .title {
@@ -39,15 +39,19 @@
 .map {
   order: 2;
   flex: 1;
-  min-width: 50%;
-  max-width: 100%;
+  height: 80%;
+  border: solid 3px green;
+  border-radius: 10%;
+  overflow: hidden;
 }
 
 .tiles {
   order: 1;
   flex: 1;
-  min-width: 50%;
-  max-width: 100%;
+  height: 80%;
+  border: solid 3px green;
+  overflow: scroll;
+  border-radius: 10%;
 }
 
 .day {

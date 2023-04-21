@@ -3,8 +3,9 @@ import styles from "./itinerary.module.css";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import React, { useState, useRef } from "react";
 import { parseItinerary, getPlaceId, API_KEY, mapContainerStyle, googleMapsLibraries } from "./itineraryHelpers";
+import Nav2 from "../components/Nav2";
 
-const markerColors = ["red", "blue", "green", "yellow", "orange", "purple", "pink", "brown", "gray", "black"];
+const markerColors = ["pink", "yellow", "orange", "green", "purple", "pink", "brown", "gray", "black"];
 
 export default function Itinerary() {
   console.log("Itinerary component rendered");
@@ -93,6 +94,7 @@ export default function Itinerary() {
 
     return (
       <div className={styles.container}>
+        <Nav2 />
         <h1 className={styles.title}>{destination}</h1>
         <div className={styles.content}>
           {typeof result === "string" ? (
@@ -100,7 +102,7 @@ export default function Itinerary() {
               <div className={styles.map}>
                 <GoogleMap
                   mapContainerStyle={mapContainerStyle}
-                  zoom={12}
+                  zoom={13.5}//12
                   center={mapCenter}
                   onLoad={onLoad}
                   onUnmount={onUnmount}
