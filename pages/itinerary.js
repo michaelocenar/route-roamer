@@ -26,6 +26,7 @@ export default function Itinerary() {
   };
 
   if (typeof result === "string") {
+    console.log("result", result);
     console.log("Result is a string");
     const itinerary = parseItinerary(result);
     const allLocations = itinerary.flatMap((day, dayIndex) =>
