@@ -93,79 +93,83 @@ export default function Itinerary() {
 
     return (
       <div className={styles.container}>
-        <h1>{destination}</h1>
-        {typeof result === "string" ? (
-          <LoadScript googleMapsApiKey={API_KEY} libraries={googleMapsLibraries}>
-            <GoogleMap
-              mapContainerStyle={mapContainerStyle}
-              zoom={12}
-              center={mapCenter}
-              onLoad={onLoad}
-              onUnmount={onUnmount}
-            >
-              {allLocations.map((location, index) => (
-                <Marker
-                  key={index}
-                  position={location}
-                  onClick={() => onMarkerClick(index, location)}
-                  icon={{
-                    url: `http://maps.google.com/mapfiles/ms/icons/${markerColors[location.dayIndex % markerColors.length]}-dot.png`,
-                  }}
+        <h1 className={styles.title}>{destination}</h1>
+        <div className={styles.content}>
+          {typeof result === "string" ? (
+            <LoadScript googleMapsApiKey={API_KEY} libraries={googleMapsLibraries}>
+              <div className={styles.map}>
+                <GoogleMap
+                  mapContainerStyle={mapContainerStyle}
+                  zoom={12}
+                  center={mapCenter}
+                  onLoad={onLoad}
+                  onUnmount={onUnmount}
                 >
-                  {console.log("Marker location:", location)}
-                  {openInfoWindow === index && (
-                    <InfoWindow onCloseClick={() => setOpenInfoWindow(-1)} options={{ pixelOffset: new window.google.maps.Size(0, -35), maxWidth: 200 }}>
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                        {placeDetails && placeDetails.photos && placeDetails.photos.length > 0 && (
-                          <img
-                            src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${placeDetails.photos[0].photo_reference}&key=${API_KEY}`}
-                            alt={placeDetails.name}
-                            style={{ marginBottom: '8px', borderRadius: '4px' }}
-                          />
-                        )}
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                          <h4 style={{ margin: 0, marginBottom: '4px', fontWeight: 'bold', fontSize: '16px' }}>{placeDetails ? placeDetails.name : 'Loading...'}</h4>
-                          <p style={{ margin: 0, fontSize: '14px' }}>{placeDetails ? placeDetails.formatted_address : 'Loading...'}</p>
-                          <p style={{ margin: 0, fontSize: '14px' }}>Rating: {placeDetails ? placeDetails.rating : 'Loading...'}</p>
-                        </div>
-                      </div>
-                    </InfoWindow>
-                  )}
-                </Marker>
-              ))}
-            </GoogleMap>
-            <div className={styles.tiles}>
-              {itinerary.map((day, dayIndex) => (
-                <div key={dayIndex} className={styles.day}>
-                  <h2>
-                    Day {dayIndex + 1}: {day.Date || "No date provided"}
-                  </h2>
-                  <ul className={styles.itinerary}>
-                    {day.Activities.map((activity, activityIndex) => (
-                      <li key={activityIndex}>
-                        {activity.Time}:{" "}
-                        <a
-                          onClick={() =>
-                            handleTextClick(dayIndex, activityIndex)
-                          }
-                          style={{ cursor: "pointer", color: "blue" }}
-                        >
-                          {activity.Activity}
-                        </a>
-                        <br />
-                        {activity.Description}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                  {allLocations.map((location, index) => (
+                    <Marker
+                      key={index}
+                      position={location}
+                      onClick={() => onMarkerClick(index, location)}
+                      icon={{
+                        url: `http://maps.google.com/mapfiles/ms/icons/${markerColors[location.dayIndex % markerColors.length]}-dot.png`,
+                      }}
+                    >
+                      {console.log("Marker location:", location)}
+                      {openInfoWindow === index && (
+                        <InfoWindow onCloseClick={() => setOpenInfoWindow(-1)} options={{ pixelOffset: new window.google.maps.Size(0, -35), maxWidth: 200 }}>
+                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            {placeDetails && placeDetails.photos && placeDetails.photos.length > 0 && (
+                              <img
+                                src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${placeDetails.photos[0].photo_reference}&key=${API_KEY}`}
+                                alt={placeDetails.name}
+                                style={{ marginBottom: '8px', borderRadius: '4px' }}
+                              />
+                            )}
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                              <h4 style={{ margin: 0, marginBottom: '4px', fontWeight: 'bold', fontSize: '16px' }}>{placeDetails ? placeDetails.name : 'Loading...'}</h4>
+                              <p style={{ margin: 0, fontSize: '14px' }}>{placeDetails ? placeDetails.formatted_address : 'Loading...'}</p>
+                              <p style={{ margin: 0, fontSize: '14px' }}>Rating: {placeDetails ? placeDetails.rating : 'Loading...'}</p>
+                            </div>
+                          </div>
+                        </InfoWindow>
+                      )}
+                    </Marker>
+                  ))}
+                </GoogleMap>
+              </div>
+              <div className={styles.tiles}>
+                {itinerary.map((day, dayIndex) => (
+                  <div key={dayIndex} className={styles.day}>
+                    <h2>
+                      Day {dayIndex + 1}: {day.Date || "No date provided"}
+                    </h2>
+                    <ul className={styles.itinerary}>
+                      {day.Activities.map((activity, activityIndex) => (
+                        <li key={activityIndex}>
+                          {activity.Time}:{" "}
+                          <a
+                            onClick={() =>
+                              handleTextClick(dayIndex, activityIndex)
+                            }
+                            style={{ cursor: "pointer", color: "blue" }}
+                          >
+                            {activity.Activity}
+                          </a>
+                          <br />
+                          {activity.Description}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </LoadScript>
+          ) : (
+            <div className={styles.container}>
+              <h1>Error: No itinerary data found.</h1>
             </div>
-          </LoadScript>
-        ) : (
-          <div className={styles.container}>
-            <h1>Error: No itinerary data found.</h1>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     );    
     } else {
