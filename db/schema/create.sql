@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS favourite_itinerary CASCADE;
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
-  avatar VARCHAR(255) NOT NULL
+  avatar TEXT NOT NULL
 );
 
 CREATE TABLE itinerary (
@@ -29,12 +29,15 @@ CREATE TABLE destinations (
 
 CREATE TABLE interests (
   id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER NOT NULL REFERENCES users(id),
   name VARCHAR(255) NOT NULL,
   description TEXT
 );
 
 CREATE TABLE itinerary_interests (
   id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER NOT NULL REFERENCES users(id),
+  description TEXT,
   itinerary_id INTEGER NOT NULL REFERENCES itinerary(id),
   interest_id INTEGER NOT NULL REFERENCES interests(id)
 );
