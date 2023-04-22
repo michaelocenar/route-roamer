@@ -27,11 +27,11 @@ export default function Itinerary() {
     const itineraryElement = document.getElementById("itineraryContent");
     const text = itineraryElement.innerText.split("\n");
   
-    const pdf = new jsPDF("p", "pt", "a4"); // Set the orientation to portrait mode
+    const pdf = new jsPDF("p", "pt", "a4"); 
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
-    const margin = 40; // You can adjust the margin as needed
-    const lineHeight = 20; // You can adjust the line height as needed
+    const margin = 40;
+    const lineHeight = 20;
     const maxLineWidth = pageWidth - 2 * margin;
   
     let y = margin;
@@ -42,6 +42,8 @@ export default function Itinerary() {
       "Keyboard shortcuts",
       "Terms of Use",
       "Download Itinerary as PDF",
+      "Get Directions",
+
     ];
   
     const filteredText = text.filter(
