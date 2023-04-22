@@ -28,6 +28,16 @@
   margin: 0;
 }
 
+.icon{
+  width: 35px;
+  height: 30px;
+}
 .icon:hover {
   color: #45597e !important;
+}
+
+.fullNav{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

@@ -17,12 +17,27 @@
   margin-left: 10px;
 }
 
+.nav a:hover {
+  color: rgb(41, 56, 116);
+}
+
+
 .logo img {
   padding: 0;
   border: none;
   margin: 0;
 }
 
+.icon{
+  width: 35px;
+  height: 30px;
+}
 .icon:hover {
   color: #45597e !important;
+}
+
+.fullNav{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
