@@ -27,7 +27,7 @@ export default function Itinerary() {
     const itineraryElement = document.getElementById("itineraryContent");
     const text = itineraryElement.innerText.split("\n");
   
-    const pdf = new jsPDF("p", "pt", "a4"); 
+    const pdf = new jsPDF("p", "pt", "a4");
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
     const margin = 40;
@@ -43,7 +43,6 @@ export default function Itinerary() {
       "Terms of Use",
       "Download Itinerary as PDF",
       "Get Directions",
-
     ];
   
     const filteredText = text.filter(
@@ -56,11 +55,13 @@ export default function Itinerary() {
         y = margin;
       }
   
-      if (line.startsWith("Day")) {
+      const formattedLine = line.replace(/(\d{2}:\d{2}):/g, "$1: ");
+      
+      if (formattedLine.startsWith("Day")) {
         pdf.setFont("helvetica", "bold");
         pdf.setFontSize(16);
         y += lineHeight;
-      } else if (line.endsWith(":")) {
+      } else if (formattedLine.endsWith(":")) {
         pdf.setFont("helvetica", "bold");
         pdf.setFontSize(12);
       } else {
@@ -68,7 +69,7 @@ export default function Itinerary() {
         pdf.setFontSize(12);
       }
   
-      const splitLines = pdf.splitTextToSize(line, maxLineWidth);
+      const splitLines = pdf.splitTextToSize(formattedLine, maxLineWidth);
   
       for (const splitLine of splitLines) {
         pdf.text(splitLine, margin, y);
@@ -78,6 +79,8 @@ export default function Itinerary() {
   
     pdf.save("itinerary.pdf");
   };
+  
+  
   
   if (typeof result === "string") {
     console.log("Result is a string");
