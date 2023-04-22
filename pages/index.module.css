@@ -9,12 +9,12 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding-top: 25px;
   background-color: transparent;
   color: whitesmoke;
   font-family: 'Manrope', sans-serif;
   right: 0;
   margin-right: 100px; 
+  margin-bottom: 40px;
 }
 
 .main,

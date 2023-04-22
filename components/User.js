@@ -2,7 +2,6 @@ import { React, useEffect } from 'react';
 import styles from "/components/User.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
 const User = () => {
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap");
@@ -13,23 +12,23 @@ const User = () => {
         <img src="https://static.vecteezy.com/system/resources/previews/010/054/157/original/chat-bot-robot-avatar-in-circle-round-shape-isolated-on-white-background-stock-illustration-ai-technology-futuristic-helper-communication-conversation-concept-in-flat-style-vector.jpg" className={styles.userImage} />
       </span>
       <div className={styles.userText}>
-        <div class="col-md-12">
-          <div class="table-responsive" className={styles.userInfo}>
-            <table class="table table-user-information">
+        <div className="col-md-12">
+          <div className={`${styles.userInfo} table-responsive`}>
+            <table className="table table-user-information">
               <tbody>
                 <tr>
                   <td>
                     <strong>
-                      <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                      <span className="glyphicon glyphicon-asterisk text-primary"></span>
                       User ID
                     </strong>
                   </td>
-                  <td>1234</td>
+                  <td style={{ color: "#FF0000" }}>1234</td>
                 </tr>
                 <tr>
                   <td>
                     <strong>
-                      <span class="glyphicon glyphicon-user"></span>
+                      <span className="glyphicon glyphicon-user"></span>
                       Username
                     </strong>
                   </td>
@@ -38,7 +37,7 @@ const User = () => {
                 <tr>
                   <td>
                     <strong>
-                      <span class="glyphicon glyphicon-cloud text-primary"></span>
+                      <span className="glyphicon glyphicon-cloud text-primary"></span>
                       First Name
                     </strong>
                   </td>
@@ -47,7 +46,7 @@ const User = () => {
                 <tr>
                   <td>
                     <strong>
-                      <span class="glyphicon glyphicon-cloud text-primary"></span>
+                      <span className="glyphicon glyphicon-cloud text-primary"></span>
                       Last Name
                     </strong>
                   </td>
@@ -56,7 +55,7 @@ const User = () => {
                 <tr>
                   <td>
                     <strong>
-                      <span class="glyphicon glyphicon-cloud text-primary"></span>
+                      <span className="glyphicon glyphicon-cloud text-primary"></span>
                       Email
                     </strong>
                   </td>

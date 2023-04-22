@@ -1,6 +1,6 @@
 .userImage {
-  width: 300px;
-  height: 300px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
 }
 
@@ -11,4 +11,14 @@
 
 .userText {
   padding-top: 50px;
+  padding-left: 10px;
+  padding-bottom: 25px;
+}
+
+div.userInfo td {
+  color: rgb(189, 192, 195) !important;
+}
+
+.img{
+  margin-right: 10px;
 }
