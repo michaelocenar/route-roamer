@@ -18,7 +18,7 @@
 }
 
 .nav a:hover {
-  color: rgb(4, 52, 2);
+  color: rgb(41, 56, 116);
 }
 
 
@@ -28,3 +28,6 @@
   margin: 0;
 }
 
+.icon:hover {
+  color: #45597e !important;
+}

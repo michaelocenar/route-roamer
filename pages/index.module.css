@@ -8,7 +8,7 @@
   position: fixed;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
+  align-content: center;
   background-color: transparent;
   color: whitesmoke;
   font-family: 'Manrope', sans-serif;
@@ -31,7 +31,7 @@
   border: 4px;
   color: whitesmoke;
   font-family: 'Manrope', sans-serif;
-  margin-bottom: 40px;
+  margin-bottom: 100px;
 }
 
 .main .title1 {
@@ -135,6 +135,12 @@
   animation: spin 2s linear infinite;
   margin-bottom: 20px;
   font-family: 'Manrope', sans-serif;
+}
+
+.label{
+  color: rgb(161, 174, 185);
+  font-size: 12px;
+  margin-bottom: 2px;
 }
 
 @keyframes spin {

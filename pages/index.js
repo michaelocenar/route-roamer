@@ -88,7 +88,7 @@ export default function Home() {
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
             />
-            <label for="name">Start date</label>
+            <label for="dates" class={styles.label}>Start Date</label>
             <input
               type="date"
               name="start_date"
@@ -96,6 +96,7 @@ export default function Home() {
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
+            <label for="dates" class={styles.label}>End Date</label>
             <input
               type="date"
               name="end_date"
@@ -150,7 +151,6 @@ export default function Home() {
             </div>
             <input type="submit" value="CREATE" />
           </form>
-          <div className={styles.result}>{result}</div>
         </main>
       </div>
     </div>
