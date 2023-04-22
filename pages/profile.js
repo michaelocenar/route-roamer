@@ -13,7 +13,6 @@ const Profile = () => {
           <User />
         </div>
         <div className={styles.profile}></div>
-        <div className={styles.favTitle}><h3>My Favourite Itineraries</h3></div>
         <div className={styles.carouselContainer}>
           <BootstrapCarousel />
         </div>
@@ -23,3 +22,4 @@ const Profile = () => {
 };
 
 export default Profile;
+

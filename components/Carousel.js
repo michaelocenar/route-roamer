@@ -14,6 +14,7 @@ export default function BootstrapCarousel() {
   };
   return (
     <div className={styles.carouselContainer}>
+        <div className={styles.favTitle}><h3>FAVOURITES</h3></div>
       <Carousel activeIndex={index} onSelect={handleSelect} >
         {bootstrap.map((item) => (
           <Carousel.Item key={item.id} className={styles.itemP} autoplay={false} interval={8000}>

@@ -2,15 +2,17 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 .tile {
   position: relative;
-  display: block;
-  width: 325px;
+  width: calc((100% / 4) - 60px);
   height: 325px;
   margin: 20px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 10px;
 }
 
 .imageContainer {
@@ -39,7 +41,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.8;
+  opacity: 0.6;
   transition: opacity 0.3s ease-in-out;
   background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
 }
@@ -54,4 +56,22 @@
 
 .tile:hover .overlay {
   opacity: 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .tile {
+    width: calc((100% / 3) - 40px);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .tile {
+    width: calc((100% / 2) - 40px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .tile {
+    width: calc(100% - 40px);
+  }
 }

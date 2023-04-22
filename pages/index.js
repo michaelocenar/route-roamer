@@ -6,7 +6,6 @@ import Nav from "../components/Nav";
 import RotatingGlobe from "../components/RotatingGlobe";
 
 
-
 export default function Home() {
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -75,45 +74,51 @@ export default function Home() {
           >
             <div className={styles.modalContent}>
               <div className={styles.loader}></div>
-              <p>Generating itinerary...</p>
+              <p>CREATING ITINERARY</p>
             </div>
           </div>
           <form onSubmit={onSubmit}>
-            <h3>Create your travel itinerary</h3>
+            <div className={styles.title1}>
+            <h4>CREATE YOUR PERFECT ITINERARY</h4>
+            </div>
             <input
               type="text"
               name="destination"
-              placeholder="Enter destination"
+              placeholder="Where to?"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
             />
+            <label for="dates" class={styles.label}>Start Date</label>
             <input
               type="date"
               name="start_date"
-              placeholder="Enter start date"
+              placeholder="Starting on?"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
+            <label for="dates" class={styles.label}>End Date</label>
             <input
               type="date"
               name="end_date"
-              placeholder="Enter end date"
+              placeholder="Until when?"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
             <input
               type="number"
               name="budget"
-              placeholder="Enter your budget"
+              placeholder="Budget: 2000"
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
             />
             <div>
-              <h3>Preferences</h3>
+            <div className={styles.title2}>
+              <h5>Optional Preferences</h5>
+              </div>
               <input
                 type="text"
                 name="activities"
-                placeholder="Enter activity preferences"
+                placeholder="Activity: Hiking, Shopping, Swimming"
                 value={preferences.activities}
                 onChange={(e) =>
                   setPreferences({ ...preferences, activities: e.target.value })
@@ -122,7 +127,7 @@ export default function Home() {
               <input
                 type="text"
                 name="accommodation"
-                placeholder="Enter accommodation preferences"
+                placeholder="Accomodation: Hotel, Hostel, AirBNB"
                 value={preferences.accommodation}
                 onChange={(e) =>
                   setPreferences({
@@ -134,7 +139,7 @@ export default function Home() {
               <input
                 type="text"
                 name="transportation"
-                placeholder="Enter transportation preferences"
+                placeholder="Transportation: Car, Train, Plane"
                 value={preferences.transportation}
                 onChange={(e) =>
                   setPreferences({
@@ -144,9 +149,8 @@ export default function Home() {
                 }
               />
             </div>
-            <input type="submit" value="Generate itinerary" />
+            <input type="submit" value="CREATE" />
           </form>
-          <div className={styles.result}>{result}</div>
         </main>
       </div>
     </div>
