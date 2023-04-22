@@ -17,7 +17,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: 100vh;
   background-color: #1f2125;
 }
 
@@ -44,7 +44,7 @@
 .map {
   order: 2;
   flex: 1;
-  height: 80%;
+  height: 70vh;
   border: solid 3px #4caf50; 
   border-radius: 20px; 
   overflow: hidden;
@@ -54,15 +54,14 @@
 .tiles {
   order: 1;
   flex: 1;
-  height: 80%;
+  max-height: 70vh; 
+  overflow-y: auto; 
   background-color: #2b2e35;
   border: solid 3px #4caf50;
-  overflow-y: scroll;
   border-radius: 20px;
   box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  padding: 0 4px;
 }
 
 .tiles::-webkit-scrollbar {
@@ -76,11 +75,11 @@
 }
 
 .tiles::-webkit-scrollbar-thumb {
-  background-color: #3f51b5;
+  background-color: #423e3e;
   border-radius: 20px;
-  height: calc(100% - 8px); /* Adjust the height here */
-  margin-top: 4px; /* Add margin to the top */
-  margin-bottom: 4px; /* Add margin to the bottom */
+  height: calc(100% - 8px); 
+  margin-top: 4px; 
+  margin-bottom: 4px; 
 }
 
 .day {
@@ -195,4 +194,24 @@
   color: #d8d8d8;
   font-family: "ColfaxAI", Helvetica, sans-serif;
   margin-left: 24px;
+}
+
+.infoWindowContent {
+  background-color: #2b2e35;
+  border-radius: 8px;
+  padding: 12px;
+  color: #d8d8d8;
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+  font-size: 16px;
+  box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 200px;
+}
+
+.infoWindowContent h4 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-top: 0;
+  margin-bottom: 8px;
 }

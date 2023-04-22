@@ -60,7 +60,7 @@ module.exports = async function(req, res) {
 function generatePrompt(destination, startDate, endDate, budget, preferences) {
   const { activities, accommodation, transportation } = preferences;
 
-  return `Create a suggested itinerary for a trip to ${destination} from ${startDate} to ${endDate} with a budget of $${budget}. Return the itinerary in JSON format using the following structure:
+  return `Create a suggested itinerary for a trip to ${destination} from ${startDate} to ${endDate} with a budget of $${budget}. Return the itinerary in JSON format only using the following structure:
   {
     "Itinerary": [
       {
@@ -71,8 +71,8 @@ function generatePrompt(destination, startDate, endDate, budget, preferences) {
             "Time": "Suggested time for the activity in 12-hour format",
             "Activity": "Activity name",
             "Location": {
-              "lat": "Latitude of the activity in decimal format",
-              "lng": "Longitude of the activity in decimal format"
+              "lat": "Latitude of the activity in decimal format with 7 decimals",
+              "lng": "Longitude of the activity in decimal format with 7 decimals"
             },
             "Description": "Activity description"
           }
