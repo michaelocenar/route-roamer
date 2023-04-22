@@ -76,11 +76,11 @@
 }
 
 .tiles::-webkit-scrollbar-thumb {
-  background-color: #3f51b5;
+  background-color: #423e3e;
   border-radius: 20px;
-  height: calc(100% - 8px); /* Adjust the height here */
-  margin-top: 4px; /* Add margin to the top */
-  margin-bottom: 4px; /* Add margin to the bottom */
+  height: calc(100% - 8px); 
+  margin-top: 4px; 
+  margin-bottom: 4px; 
 }
 
 .day {
