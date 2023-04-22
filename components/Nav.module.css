@@ -31,6 +31,7 @@
 .icon{
   width: 35px;
   height: 30px;
+  display: block;
 }
 .icon:hover {
   color: #45597e !important;
@@ -40,4 +41,21 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.iconText {
+  display: block;
+  align-items: center;
+  font-size: 12px;
+  margin-top: 5px;
+  color: #6c7584;
+}
+
+
+.iconText1 {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 5px;
+  color: #6c7584;
 }

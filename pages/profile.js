@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav2 from "../components/Nav2";
+import Nav from "../components/Nav";
 import User from "../components/User";
 import styles from "./profile.module.css";
 import BootstrapCarousel from "../components/Carousel";
@@ -7,7 +7,7 @@ import BootstrapCarousel from "../components/Carousel";
 const Profile = () => {
   return (
     <div>
-      <Nav2 />
+      <Nav />
       <div className={styles.container}>
         <div className={styles.User}>
           <User />
