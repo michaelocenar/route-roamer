@@ -1,36 +1,24 @@
-@font-face {
-  font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
-      format("woff2"),
-    url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
-    url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
-  font-weight: bold;
-  font-style: normal;
-}
-
 .container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #1f2125;
+  background-color: rgb(22, 23, 36);
+  font-family: 'Manrope', sans-serif;
+  /* background-color: rgb(22, 23, 36); */
+
 }
 
 .title {
-  font-family: "ColfaxAI", Helvetica, sans-serif;
-  font-size: 48px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 35px;
   line-height: 56px;
   font-weight: bold;
   color: #ffffff;
   margin: 0;
   padding: 0;
+  margin-left: 100px;
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
   text-transform: uppercase;
   letter-spacing: 1.5px;
 }
@@ -45,10 +33,12 @@
   order: 2;
   flex: 1;
   height: 70vh;
-  border: solid 3px #4caf50; 
+  /* border: solid 3px #4caf50;  */
   border-radius: 20px; 
   overflow: hidden;
-  box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08); 
+  box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
+  margin: 20px;
+  margin-right: 80px;
 }
 
 .tiles {
@@ -56,38 +46,45 @@
   flex: 1;
   max-height: 70vh; 
   overflow-y: auto; 
-  background-color: #2b2e35;
-  border: solid 3px #4caf50;
+  background-color: rgb(22, 23, 36);
+  /* border: solid 3px #4caf50; */
   border-radius: 20px;
   box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
   scroll-behavior: smooth;
   scrollbar-width: thin;
+  margin: 20px;
+  margin-left: 80px;
+
 }
 
 .tiles::-webkit-scrollbar {
   width: 10px;
   height: 10px;
+  padding-right: 20px;
 }
 
 .tiles::-webkit-scrollbar-track {
   background-color: #2b2e35;
   border-radius: 20px;
+  padding-right: 20px;
 }
 
 .tiles::-webkit-scrollbar-thumb {
-  background-color: #423e3e;
+  background-color: rgb(27, 28, 43);
+  /* background-color: rgb(22, 23, 36); */
   border-radius: 20px;
   height: calc(100% - 8px); 
   margin-top: 4px; 
   margin-bottom: 4px; 
+  padding-right: 20px;
 }
 
 .day {
   margin-top: 40px;
   text-align: left;
   color: #ffffff;
-  font-size: 28px;
-  font-family: "ColfaxAI", Helvetica, sans-serif;
+  font-size: 20px;
+  font-family: 'Manrope', sans-serif;
   padding-left: 20px;
 }
 
@@ -97,7 +94,7 @@
   font-size: 18px;
   line-height: 1.7;
   color: #d8d8d8;
-  font-family: "ColfaxAI", Helvetica, sans-serif;
+  font-family: 'Manrope', sans-serif;
   margin-left: 20px;
 }
 
@@ -135,12 +132,15 @@
   z-index: -1;
   height: 100%;
   width: 100%;
-  background-color: #1f2125;
+  /* background-color: #1f2125; */
+  background-color: rgb(22, 23, 36);
+
 }
 
 .itinerary_content__3mmbU {
-  background-image: linear-gradient(135deg, #2b2e35 0%, #1f2125 100%);
-  background-color: #1f2125;
+  /* background-image: linear-gradient(135deg, #2b2e35 0%, #1f2125 100%); */
+  /* background-color: #1f2125; */
+  background-color: rgb(22, 23, 36);
   min-height: 100vh;
 }
 
@@ -151,7 +151,7 @@
   line-height: 1.5;
   color: #62a9ff;
   text-decoration: none;
-  background-color: #2b2e35;
+  background-color: rgb(22, 23, 36);
   padding: 4px 8px;
   border-radius: 4px;
   transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
@@ -160,7 +160,7 @@
 
 .locationLink:hover {
   color: #89c3ff;
-  background-color: #1f2125;
+  background-color: rgb(22, 23, 36);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
@@ -192,7 +192,7 @@
   font-size: 14px;
   line-height: 1.7;
   color: #d8d8d8;
-  font-family: "ColfaxAI", Helvetica, sans-serif;
+  font-family: 'Manrope', sans-serif;
   margin-left: 24px;
 }
 
@@ -201,7 +201,7 @@
   border-radius: 8px;
   padding: 12px;
   color: #d8d8d8;
-  font-family: "ColfaxAI", Helvetica, sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 16px;
   box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
   width: 100%;
