@@ -7,7 +7,7 @@ const Nav = () => {
   return (
     <div className={styles.nav}>
       <Link legacyBehaviour href="/">
-            <img src="/nav-images/result.png" width={450} height={225}/>
+            <img src="/nav-images/result.png" width={500} height={300}/>
       </Link>
       <nav>
         <Link href="/">Homepage</Link>
