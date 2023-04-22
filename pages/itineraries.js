@@ -5,10 +5,9 @@ import TileGrid from '../components/TileGrid';
 
 const itineraries = () => {
   return (
-    <div className={styles.full}>
+    <div className={styles.background}>
       <Nav2 />
-      <h2>CHECK OUT THESE ROUTES</h2>
-      <div className={styles.background}>
+      <div>
         <TileGrid/>
      </div>
     </div>

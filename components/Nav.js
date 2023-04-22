@@ -1,11 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './Nav.module.css';
+import Image from 'next/image'
 
 const Nav = () => {
   return (
     <div className={styles.nav}>
-      <h2>ROUTE ROAMER</h2>
+      <Link legacyBehaviour href="/">
+            <img src="/nav-images/result.png" width={450} height={225}/>
+      </Link>
       <nav>
         <Link href="/">Homepage</Link>
         <Link href="/profile">Profile</Link>

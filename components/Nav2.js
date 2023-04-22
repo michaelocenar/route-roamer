@@ -1,14 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './Nav2.module.css';
+import Image from 'next/image'
 
 const Nav2 = () => {
   return (
     <div className={styles.nav}>
       <Link legacyBehaviour href="/">
-        <div className={styles.logo}>
-            <img src="/nav-images/result.png"/>
-        </div>
+            <img src="/nav-images/result.png" width={450} height={225}/>
       </Link>
       <nav>
         <Link href="/">Homepage</Link>
