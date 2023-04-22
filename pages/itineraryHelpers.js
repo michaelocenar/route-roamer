@@ -2,7 +2,7 @@ export const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
 export const mapContainerStyle = {
   width: "100%",
-  height: "400px",
+  height: "100%",
 };
 
 export const googleMapsLibraries = ["places"];

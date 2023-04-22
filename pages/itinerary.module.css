@@ -17,81 +17,182 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  height: 80vh;
+  background-color: #1f2125;
 }
 
 .title {
   font-family: "ColfaxAI", Helvetica, sans-serif;
-  font-size: 40px;
-  line-height: 48px;
+  font-size: 48px;
+  line-height: 56px;
   font-weight: bold;
-  color: #202123;
+  color: #ffffff;
   margin: 0;
   padding: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.map {
+  order: 2;
+  flex: 1;
+  height: 80%;
+  border: solid 3px #4caf50; 
+  border-radius: 20px; 
+  overflow: hidden;
+  box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08); 
+}
+
+.tiles {
+  order: 1;
+  flex: 1;
+  height: 80%;
+  background-color: #2b2e35;
+  border: solid 3px #4caf50;
+  overflow-y: scroll;
+  border-radius: 20px;
+  box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  padding: 0 4px;
+}
+
+.tiles::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.tiles::-webkit-scrollbar-track {
+  background-color: #2b2e35;
+  border-radius: 20px;
+}
+
+.tiles::-webkit-scrollbar-thumb {
+  background-color: #3f51b5;
+  border-radius: 20px;
+  height: calc(100% - 8px); /* Adjust the height here */
+  margin-top: 4px; /* Add margin to the top */
+  margin-bottom: 4px; /* Add margin to the bottom */
+}
+
+.day {
+  margin-top: 40px;
+  text-align: left;
+  color: #ffffff;
+  font-size: 28px;
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+  padding-left: 20px;
 }
 
 .itinerary {
-  margin-top: 40px;
   list-style: none;
   padding: 0;
-  font-size: 24px;
-  line-height: 1.5;
-  color: #353740;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #d8d8d8;
   font-family: "ColfaxAI", Helvetica, sans-serif;
+  margin-left: 20px;
 }
 
 .itinerary li {
   margin-bottom: 16px;
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   padding-left: 20px;
   position: relative;
-}
-
-.itinerary li:before {
-  content: "";
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  background-color: #10a37f;
-  border-radius: 50%;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .itinerary li:last-of-type {
-  margin-bottom: 0;
+  border-bottom: none;
 }
 
 .itinerary li:last-of-type:before {
   display: none;
 }
 
-.info-window {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.itinerary a {
+  color: #62d3a3;
+  text-decoration: underline;
 }
 
-.info-window img {
-  margin-bottom: 8px;
-  border-radius: 4px;
+.darkModeWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  background-color: #1f2125;
 }
 
-.info-window h4 {
-  margin: 0;
-  margin-bottom: 4px;
+.itinerary_content__3mmbU {
+  background-image: linear-gradient(135deg, #2b2e35 0%, #1f2125 100%);
+  background-color: #1f2125;
+  min-height: 100vh;
+}
+
+.locationLink {
+  cursor: pointer;
+  font-size: 18px;
   font-weight: bold;
-  font-size: 16px;
+  line-height: 1.5;
+  color: #62a9ff;
+  text-decoration: none;
+  background-color: #2b2e35;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.info-window p {
-  margin: 0;
+.locationLink:hover {
+  color: #89c3ff;
+  background-color: #1f2125;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.itinerary li .timeAndActivity {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.itinerary li .time {
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: bold;
+  margin-right: 8px;
+  color: #ffffff;
+  background: #10a37f;
+  padding: 4px 8px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.itinerary li .activity {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: normal;
+}
+
+.itinerary li .description {
   font-size: 14px;
+  line-height: 1.7;
+  color: #d8d8d8;
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+  margin-left: 24px;
 }

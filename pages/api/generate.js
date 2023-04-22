@@ -37,7 +37,7 @@ module.exports = async function(req, res) {
       model: "text-davinci-003",
       prompt: generatePrompt(destination, startDate, endDate, budget, preferences),
       temperature: 0.7,
-      max_tokens: 2000,
+      max_tokens: 3700,
     });
 
     console.log("Completion data:", completion.data);
@@ -61,11 +61,11 @@ function generatePrompt(destination, startDate, endDate, budget, preferences) {
   const { activities, accommodation, transportation } = preferences;
 
   return `Create a suggested itinerary for a trip to ${destination} from ${startDate} to ${endDate} with a budget of $${budget}. Return the itinerary in JSON format using the following structure:
-Include a label for each date i.e. Day 1, Day 2, etc.
   {
     "Itinerary": [
       {
         "Date": "Date of the activities",
+        "Label": "Include a label for each date i.e. Day 1, Day 2, etc."
         "Activities": [
           {
             "Time": "Suggested time for the activity in 12-hour format",
