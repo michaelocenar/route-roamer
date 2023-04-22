@@ -5,7 +5,6 @@ import React, { useState, useRef } from "react";
 import { parseItinerary, API_KEY, mapContainerStyle, googleMapsLibraries } from "./itineraryHelpers";
 import Nav2 from "../components/Nav2";
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 
 export default function Itinerary() {
   console.log("Itinerary component rendered");
@@ -49,6 +48,13 @@ export default function Itinerary() {
       (line) => !unwantedWords.some((word) => line.includes(word))
     );
   
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(20);
+    const headerText = "Your Itinerary";
+    const headerWidth = pdf.getStringUnitWidth(headerText) * pdf.getFontSize();
+    pdf.text(headerText, (pageWidth - headerWidth) / 2, y);
+    y += lineHeight * 2; 
+  
     for (const line of filteredText) {
       if (y > pageHeight - margin) {
         pdf.addPage();
@@ -56,7 +62,7 @@ export default function Itinerary() {
       }
   
       const formattedLine = line.replace(/(\d{2}:\d{2}):/g, "$1: ");
-      
+
       if (formattedLine.startsWith("Day")) {
         pdf.setFont("helvetica", "bold");
         pdf.setFontSize(16);
@@ -77,7 +83,9 @@ export default function Itinerary() {
       }
     }
   
-    pdf.save("itinerary.pdf");
+    const currentDate = new Date();
+    const fileName = `itinerary_${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}.pdf`;
+    pdf.save(fileName);
   };
   
   
