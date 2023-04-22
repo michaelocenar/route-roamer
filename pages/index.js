@@ -6,7 +6,6 @@ import Nav from "../components/Nav";
 import RotatingGlobe from "../components/RotatingGlobe";
 
 
-
 export default function Home() {
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -89,6 +88,7 @@ export default function Home() {
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
             />
+            <label for="name">Start date</label>
             <input
               type="date"
               name="start_date"

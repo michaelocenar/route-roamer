@@ -5,7 +5,11 @@ import styles from './Nav2.module.css';
 const Nav2 = () => {
   return (
     <div className={styles.nav}>
-      <h2>ROUTE ROAMER</h2>
+      <Link legacyBehaviour href="/">
+        <div className={styles.logo}>
+            <img src="/nav-images/result.png"/>
+        </div>
+      </Link>
       <nav>
         <Link href="/">Homepage</Link>
         <Link href="/profile">Profile</Link>

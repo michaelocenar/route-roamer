@@ -3,7 +3,6 @@
   font-family: 'Manrope', sans-serif;
 }
 
-
 .main {
   display: flex;
   flex-direction: column;
@@ -94,6 +93,7 @@
   border-color: transparent;
   color: whitesmoke;
   font-family: 'Manrope', sans-serif;
+  font-size: 18px;
 }
 .main .result {
   font-weight: bold;
