@@ -63,6 +63,7 @@ export default function Home() {
       <Nav />
       <Head>
         <title>ROUTE ROAMER</title>
+        <link rel="icon" href="/route.png" />
       </Head>
       <div className={styles.background}>
         <RotatingGlobe />
