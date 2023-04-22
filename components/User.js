@@ -14,7 +14,7 @@ const User = () => {
       </span>
       <div className={styles.userText}>
         <div class="col-md-12">
-          <div class="table-responsive">
+          <div class="table-responsive" className={styles.userInfo}>
             <table class="table table-user-information">
               <tbody>
                 <tr>

@@ -1,4 +1,4 @@
-.profile {
+ .profile {
   position: fixed;
   top: 0;
   left: 0;
@@ -7,22 +7,39 @@
   z-index: -1;
   height: 100%;
   width: 100%;
-  background-color: white;
+  background-color: rgb(22, 23, 36);
+  color: rgb(210, 217, 223);
+  font-family: 'Manrope', sans-serif;
 }
 
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
+  color: rgb(210, 217, 223);
+  font-family: 'Manrope', sans-serif;
 }
 
 .carouselContainer {
   display: flex;
   justify-content: center;
+  color: rgb(210, 217, 223);
+  width: 1200px;
+  font-family: 'Manrope', sans-serif;
+  margin-top: 20px;
 }
 
 .favTitle {
+  display: flex;
+  align-self: flex-start;
   padding-top: 50px;
   padding-bottom: 15px;
   padding-left: 200px;
+  color: rgb(210, 217, 223);
+  font-family: 'Manrope', sans-serif;
+}
+
+.User{
+  color: aliceblue;
 }
