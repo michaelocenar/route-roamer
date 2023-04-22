@@ -20,8 +20,6 @@ export default function Itinerary() {
   const onUnmount = () => {
     mapRef.current = null;
   };
-
-  // "abcdefghijklmnopqrstuvwxyz"
   
   if (typeof result === "string") {
     console.log("Result is a string");
