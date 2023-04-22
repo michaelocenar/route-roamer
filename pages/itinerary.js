@@ -48,6 +48,27 @@ export default function Itinerary() {
       setOpenInfoWindow(locationIndex);
     };
 
+    const handleDirections = (location) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const origin = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+            const destination = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat},${origin.lng}&destination=${location.lat},${location.lng}&travelmode=driving`;
+            window.open(destination, '_blank');
+          },
+          (error) => {
+            alert('Error: ' + error.message);
+          }
+        );
+      } else {
+        alert('Geolocation is not supported by this browser.');
+      }
+    };
+    
+
     return (
       <div className={styles.darkModeWrapper}>
         <div className={styles.container}>
@@ -73,13 +94,29 @@ export default function Itinerary() {
                       {console.log("Marker location:", location)}
                       {openInfoWindow === index && (
                         <InfoWindow
-                          onCloseClick={() => setOpenInfoWindow(-1)}
-                          options={{ pixelOffset: new window.google.maps.Size(0, -35), maxWidth: 200 }}
-                        >
-                          <div>
-                            <h4>{location.name}</h4>
-                          </div>
-                        </InfoWindow>
+                        onCloseClick={() => setOpenInfoWindow(-1)}
+                        options={{
+                          pixelOffset: new window.google.maps.Size(0, -35),
+                          maxWidth: 200,
+                          boxStyle: {
+                            backgroundColor: '#2b2e35',
+                            borderRadius: '8px',
+                            boxShadow: '0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08)',
+                            padding: '16px',
+                          },
+                          closeBoxMargin: '8px',
+                          closeBoxURL: 'https://your-icon-url/close-icon.svg',
+                          infoBoxClearance: new window.google.maps.Size(20, 20),
+                          zIndex: null,
+                          disableAutoPan: false,
+                        }}
+                      >
+                        <div className={styles.infoWindowContent}>
+                          <h4>{location.name}</h4>
+                          <p>{location.address}</p>
+                          <button onClick={() => handleDirections(location)}>Get Directions</button>
+                        </div>
+                      </InfoWindow>
                       )}
                     </Marker>
                   ))}
