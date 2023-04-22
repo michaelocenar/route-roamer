@@ -29,6 +29,7 @@ export default function Itinerary() {
         ...activity.Location,
         dayIndex,
         activityIndex,
+        name: activity.Activity,
       }))
     );
     const mapCenter = {
@@ -71,8 +72,13 @@ export default function Itinerary() {
                     >
                       {console.log("Marker location:", location)}
                       {openInfoWindow === index && (
-                        <InfoWindow onCloseClick={() => setOpenInfoWindow(-1)} options={{ pixelOffset: new window.google.maps.Size(0, -35), maxWidth: 200 }}>
-                          <div></div>
+                        <InfoWindow
+                          onCloseClick={() => setOpenInfoWindow(-1)}
+                          options={{ pixelOffset: new window.google.maps.Size(0, -35), maxWidth: 200 }}
+                        >
+                          <div>
+                            <h4>{location.name}</h4>
+                          </div>
                         </InfoWindow>
                       )}
                     </Marker>

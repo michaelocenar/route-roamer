@@ -38,7 +38,7 @@ export default function Home() {
           preferences,
         }),
       });
-  
+
       const data = await response.json();
       if (response.status !== 200) {
         throw (
@@ -46,13 +46,7 @@ export default function Home() {
           new Error(`Request failed with status ${response.status}`)
         );
       }
-  
-      if (data.result.error || !data.result.itinerary) {
-        throw new Error(
-          "ChatGPT failed to provide an adequate response. Please try making edits to your itinerary."
-        );
-      }
-  
+
       setResult(data.result);
       router.push({ pathname: "/itinerary", query: { result: data.result } });
     } catch (error) {
