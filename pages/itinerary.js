@@ -26,6 +26,7 @@ export default function Itinerary() {
   };
 
   if (typeof result === "string") {
+    console.log("result", result);
     console.log("Result is a string");
     const itinerary = parseItinerary(result);
     const allLocations = itinerary.flatMap((day, dayIndex) =>
@@ -63,7 +64,7 @@ export default function Itinerary() {
       };
 
       service.getDetails(request, (result, status) => {
-        console.log("Place details result:", result); 
+        console.log("Place details result:", result);
         console.log("Place details status:", status);
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
           setPlaceDetails(result);
@@ -187,3 +188,4 @@ export default function Itinerary() {
       );
     }
   }
+
