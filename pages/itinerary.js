@@ -46,10 +46,12 @@ export default function Itinerary() {
     };
 
     const handleTextClick = (dayIndex, activityIndex) => {
+      // console.log("day and activity index:", dayIndex, activityIndex);
       const locationIndex = allLocations.findIndex(
         (loc) => loc.dayIndex === dayIndex && loc.activityIndex === activityIndex
       );
       setOpenInfoWindow(locationIndex);
+      // set place details for this so that it handles in the same way as onmarker click
     };
 
     const fetchPlaceDetails = async (placeId) => {
@@ -72,6 +74,7 @@ export default function Itinerary() {
           setDestination(`Your trip to ${result.name}`);
         }
       });
+      // make useEffect for this 
     };
 
     const onMarkerClick = async (index, location) => {
@@ -94,11 +97,12 @@ export default function Itinerary() {
     };
 
     return (
-      <div className={styles.container}>
-        <Nav2 />
-        <h1 className={styles.title}>{destination}</h1>
-        <div className={styles.content}>
-          {typeof result === "string" ? (
+      <div className={styles.darkModeWrapper}>
+        <div className={styles.container}>
+          <Nav2 />
+          <h1 className={styles.title}>{destination}</h1>
+          <div className={styles.content}>
+            {typeof result === "string" ? (
             <LoadScript googleMapsApiKey={API_KEY} libraries={googleMapsLibraries}>
               <div className={styles.map}>
                 <GoogleMap
@@ -149,38 +153,39 @@ export default function Itinerary() {
                     <ul className={styles.itinerary}>
                       {day.Activities.map((activity, activityIndex) => (
                         <li key={activityIndex}>
-                          {activity.Time}:{" "}
+                        <div className="timeAndActivity">
+                          <span className="time">{activity.Time}:</span>
                           <a
-                            onClick={() =>
-                              handleTextClick(dayIndex, activityIndex)
-                            }
-                            style={{ cursor: "pointer", color: "blue" }}
+                            onClick={() => handleTextClick(dayIndex, activityIndex)}
+                            className={styles.locationLink}
                           >
                             {activity.Activity}
                           </a>
-                          <br />
-                          {activity.Description}
-                        </li>
+                        </div>
+                        <div className="description">{activity.Description}</div>
+                      </li>
                       ))}
                     </ul>
                   </div>
                 ))}
               </div>
-            </LoadScript>
-          ) : (
-            <div className={styles.container}>
-              <h1>Error: No itinerary data found.</h1>
-            </div>
-          )}
+              </LoadScript>
+              ) : (
+          <div className={styles.container}>
+            <h1>Error: No itinerary data found.</h1>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+);   
+    } else {
+      console.log("Result is not a string");
+      return (
+        <div className={styles.container}>
+          <h1>Error: No itinerary data found.</h1>
         </div>
-      </div>
-    );
-  } else {
-    console.log("Result is not a string");
-    return (
-      <div className={styles.container}>
-        <h1>Error: No itinerary data found.</h1>
-      </div>
-    );
+      );
+    }
   }
-}
+
