@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import React, { useState, useRef } from "react";
 import { API_KEY, mapContainerStyle, googleMapsLibraries } from "./itineraryHelpers";
-import Nav2 from "../components/Nav2";
+import Nav from "../components/Nav";
 import activityRoutes from '../activityRoutes';
 import db from '../db';
 import styles from "./itineraryActivities.module.css";
@@ -125,7 +125,7 @@ export default function Itinerary({ activities }) {
   return (
     <div className={styles.darkModeWrapper}>
       <div className={styles.container}>
-        <Nav2 />
+        <Nav />
         <div className={styles.title}>
           <h1>Your Travel Itinerary</h1>
           <div className={styles.buttonDiv}>
