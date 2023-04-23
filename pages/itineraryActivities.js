@@ -3,12 +3,8 @@ import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/ap
 import React, { useState, useRef } from "react";
 import { API_KEY, mapContainerStyle, googleMapsLibraries, downloadPDF } from "./itineraryHelpers";
 import Nav from "../components/Nav";
-import activityRoutes from '../activityRoutes';
 import db from '../db';
 import styles from "./itineraryActivities.module.css";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
-
 
 export default function Itinerary({ activities }) {
   console.log("Itinerary component rendered", activities);
