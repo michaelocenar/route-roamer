@@ -66,6 +66,13 @@ export default function Itinerary({ activities }) {
     }
   };
 
+  const groupedActivities = activities.reduce((acc, activity) => {
+    if (!acc[activity.label]) {
+      acc[activity.label] = [];
+    }
+    acc[activity.label].push(activity);
+    return acc;
+  }, {});
 
   return (
     <div className={styles.darkModeWrapper}>
@@ -126,24 +133,24 @@ export default function Itinerary({ activities }) {
               </GoogleMap>
             </div>
             <div className={styles.tiles}>
-              {activities.map(activity => (
-                <div key={activity.itinerary_id} className={styles.day}>
-                  <h2>
-                    {activity.label}
-                  </h2>
+              {Object.keys(groupedActivities).map((label) => (
+                <div key={label} className={styles.day}>
+                  <h2>{label}</h2>
                   <ul className={styles.itinerary}>
-                    <li>
-                      <div className="timeAndActivity">
-                        <span className="time">{activity.time}:</span>
-                        <a
-                          onClick={() => handleTextClick(activity.itinerary_id)}
-                          className={styles.locationLink}
-                        >
-                          {activity.activity}
-                        </a>
-                      </div>
-                      <div className="description">{activity.description}</div>
-                    </li>
+                    {groupedActivities[label].map((activity) => (
+                      <li key={activity.itinerary_id}>
+                        <div className="timeAndActivity">
+                          <span className="time">{activity.time}:</span>
+                          <a
+                            onClick={() => handleTextClick(activity.itinerary_id)}
+                            className={styles.locationLink}
+                          >
+                            {activity.activity}
+                          </a>
+                        </div>
+                        <div className="description">{activity.description}</div>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               ))}
