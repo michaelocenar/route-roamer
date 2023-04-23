@@ -6,6 +6,8 @@ import Nav from "../components/Nav";
 import db from '../db';
 import styles from "./itineraryActivities.module.css";
 
+
+
 export default function Itinerary({ activities }) {
   console.log("Itinerary component rendered", activities);
 
@@ -20,6 +22,20 @@ export default function Itinerary({ activities }) {
 
   const onUnmount = () => {
     mapRef.current = null;
+  };
+
+  const allLocations = activities.map((activity) => ({
+    ...activity,
+    name: activity.label,
+  }));
+
+  const mapCenter = {
+    lat:
+      allLocations.reduce((sum, loc) => sum + loc.lat, 0) /
+      allLocations.length,
+    lng:
+      allLocations.reduce((sum, loc) => sum + loc.lng, 0) /
+      allLocations.length,
   };
 
   const handleTextClick = (itineraryId) => {
@@ -146,5 +162,3 @@ export async function getServerSideProps(context) {
   console.log('activities:', rows);
   return { props: { activities: rows } };
 }
-
-
