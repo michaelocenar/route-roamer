@@ -42,15 +42,6 @@ CREATE TABLE itinerary_interests (
   interest_id INTEGER NOT NULL REFERENCES interests(id)
 );
 
-CREATE TABLE itinerary_requests (
-  id SERIAL PRIMARY KEY NOT NULL,
-  itinerary_id INTEGER NOT NULL REFERENCES itinerary(id),
-  start_date DATE NOT NULL,
-  end_date DATE NOT NULL,
-  budget NUMERIC(10,2),
-  destination TEXT
-);
-
 CREATE TABLE itinerary_activities  (
   id SERIAL PRIMARY KEY NOT NULL,
   activity VARCHAR(255) NOT NULL,

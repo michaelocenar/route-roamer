@@ -21,6 +21,12 @@
   text-align: left;
   text-transform: uppercase;
   letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+}
+
+.title .buttonDiv {
+  margin-left: 45px;
 }
 
 .content {
@@ -214,4 +220,26 @@
   color: #ffffff;
   margin-top: 0;
   margin-bottom: 8px;
+}
+
+.downloadButton {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #10a37f;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  transition-duration: 0.4s;
+}
+
+.downloadButton:hover {
+  background-color: #62d3a3;
+  color: white;
 }
