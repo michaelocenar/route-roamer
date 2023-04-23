@@ -7,7 +7,6 @@ import db from '../db';
 import styles from "./itineraryActivities.module.css";
 
 
-
 export default function Itinerary({ activities }) {
   console.log("Itinerary component rendered", activities);
 
@@ -27,6 +26,8 @@ export default function Itinerary({ activities }) {
   const allLocations = activities.map((activity) => ({
     ...activity,
     name: activity.label,
+    lat: parseFloat(activity.lat),
+    lng: parseFloat(activity.lng),
   }));
 
   const mapCenter = {
@@ -158,7 +159,6 @@ export default function Itinerary({ activities }) {
 export async function getServerSideProps(context) {
   const { location } = context.query;
   const { rows } = await db.query('SELECT itinerary_id, label, activity, time, lat, lng, description, location FROM itinerary_activities WHERE location = $1', [location]);
-  // console.log('activities:' {activities: rows});
   console.log('activities:', rows);
   return { props: { activities: rows } };
 }
