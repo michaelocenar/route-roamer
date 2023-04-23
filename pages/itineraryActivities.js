@@ -74,6 +74,14 @@ export default function Itinerary({ activities }) {
     return acc;
   }, {});
 
+  const formatTime = (time) => {
+    const timeParts = time.split(':');
+    const hours = parseInt(timeParts[0], 10);
+    const minutes = parseInt(timeParts[1], 10);
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+  };
+  
+
   return (
     <div className={styles.darkModeWrapper}>
       <div className={styles.container}>
@@ -140,7 +148,7 @@ export default function Itinerary({ activities }) {
                     {groupedActivities[label].map((activity) => (
                       <li key={activity.itinerary_id}>
                         <div className="timeAndActivity">
-                          <span className="time">{activity.time}:</span>
+                          <span className="time">{formatTime(activity.time)}:</span>
                           <a
                             onClick={() => handleTextClick(activity.itinerary_id)}
                             className={styles.locationLink}
