@@ -1,13 +1,10 @@
 import { useRouter } from "next/router";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import React, { useState, useRef } from "react";
-import { API_KEY, mapContainerStyle, googleMapsLibraries } from "./itineraryHelpers";
+import { API_KEY, mapContainerStyle, googleMapsLibraries, downloadPDF } from "./itineraryHelpers";
 import Nav from "../components/Nav";
-import activityRoutes from '../activityRoutes';
 import db from '../db';
 import styles from "./itineraryActivities.module.css";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 
 
 export default function Itinerary({ activities }) {
@@ -26,63 +23,11 @@ export default function Itinerary({ activities }) {
     mapRef.current = null;
   };
 
-  const downloadPDF = () => {
-    const itineraryElement = document.getElementById("itineraryContent");
-    const text = itineraryElement.innerText.split("\n");
-
-    const pdf = new jsPDF("p", "pt", "a4"); // Set the orientation to portrait mode
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-    const margin = 40; // You can adjust the margin as needed
-    const lineHeight = 20; // You can adjust the line height as needed
-    const maxLineWidth = pageWidth - 2 * margin;
-
-    let y = margin;
-
-    const unwantedWords = [
-      "Map",
-      "Satellite",
-      "Keyboard shortcuts",
-      "Terms of Use",
-      "Download Itinerary as PDF",
-    ];
-
-    const filteredText = text.filter(
-      (line) => !unwantedWords.some((word) => line.includes(word))
-    );
-
-    for (const line of filteredText) {
-      if (y > pageHeight - margin) {
-        pdf.addPage();
-        y = margin;
-      }
-
-      if (line.startsWith("Day")) {
-        pdf.setFont("helvetica", "bold");
-        pdf.setFontSize(16);
-        y += lineHeight;
-      } else if (line.endsWith(":")) {
-        pdf.setFont("helvetica", "bold");
-        pdf.setFontSize(12);
-      } else {
-        pdf.setFont("helvetica", "normal");
-        pdf.setFontSize(12);
-      }
-
-      const splitLines = pdf.splitTextToSize(line, maxLineWidth);
-
-      for (const splitLine of splitLines) {
-        pdf.text(splitLine, margin, y);
-        y += lineHeight;
-      }
-    }
-
-    pdf.save("itinerary.pdf");
-  };
-
   const allLocations = activities.map((activity) => ({
     ...activity,
-    name: activity.label,
+    name: activity.activity,
+    lat: parseFloat(activity.lat),
+    lng: parseFloat(activity.lng),
   }));
 
   const mapCenter = {
@@ -121,6 +66,21 @@ export default function Itinerary({ activities }) {
     }
   };
 
+  const groupedActivities = activities.reduce((acc, activity) => {
+    if (!acc[activity.label]) {
+      acc[activity.label] = [];
+    }
+    acc[activity.label].push(activity);
+    return acc;
+  }, {});
+
+  const formatTime = (time) => {
+    const timeParts = time.split(':');
+    const hours = parseInt(timeParts[0], 10);
+    const minutes = parseInt(timeParts[1], 10);
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+  };
+  
 
   return (
     <div className={styles.darkModeWrapper}>
@@ -181,24 +141,24 @@ export default function Itinerary({ activities }) {
               </GoogleMap>
             </div>
             <div className={styles.tiles}>
-              {activities.map(activity => (
-                <div key={activity.itinerary_id} className={styles.day}>
-                  <h2>
-                    {activity.label}
-                  </h2>
+              {Object.keys(groupedActivities).map((label) => (
+                <div key={label} className={styles.day}>
+                  <h2>{label}</h2>
                   <ul className={styles.itinerary}>
-                    <li>
-                      <div className="timeAndActivity">
-                        <span className="time">{activity.time}:</span>
-                        <a
-                          onClick={() => handleTextClick(activity.itinerary_id)}
-                          className={styles.locationLink}
-                        >
-                          {activity.activity}
-                        </a>
-                      </div>
-                      <div className="description">{activity.description}</div>
-                    </li>
+                    {groupedActivities[label].map((activity) => (
+                      <li key={activity.itinerary_id}>
+                        <div className="timeAndActivity">
+                          <span className="time">{formatTime(activity.time)}:</span>
+                          <a
+                            onClick={() => handleTextClick(activity.itinerary_id)}
+                            className={styles.locationLink}
+                          >
+                            {activity.activity}
+                          </a>
+                        </div>
+                        <div className="description">{activity.description}</div>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               ))}
@@ -214,9 +174,6 @@ export default function Itinerary({ activities }) {
 export async function getServerSideProps(context) {
   const { location } = context.query;
   const { rows } = await db.query('SELECT itinerary_id, label, activity, time, lat, lng, description, location FROM itinerary_activities WHERE location = $1', [location]);
-  // console.log('activities:' {activities: rows});
   console.log('activities:', rows);
   return { props: { activities: rows } };
 }
-
-
