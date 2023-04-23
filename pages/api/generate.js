@@ -71,8 +71,8 @@ function generatePrompt(destination, startDate, endDate, budget, preferences) {
             "Time": "Suggested time for the activity in 12-hour format",
             "Activity": "Activity name",
             "Location": {
-              "lat": "Latitude of the activity in decimal format with 7 decimals",
-              "lng": "Longitude of the activity in decimal format with 7 decimals"
+              "lat": "Latitude of the activity in decimal format",
+              "lng": "Longitude of the activity in decimal format"
             },
             "Description": "Activity description"
           }
