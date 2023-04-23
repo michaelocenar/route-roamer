@@ -25,7 +25,7 @@ export default function Itinerary({ activities }) {
 
   const allLocations = activities.map((activity) => ({
     ...activity,
-    name: activity.label,
+    name: activity.activity,
     lat: parseFloat(activity.lat),
     lng: parseFloat(activity.lng),
   }));
