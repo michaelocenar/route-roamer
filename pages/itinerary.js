@@ -3,7 +3,7 @@ import styles from "./itinerary.module.css";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import React, { useState, useRef } from "react";
 import { parseItinerary, API_KEY, mapContainerStyle, googleMapsLibraries, downloadPDF } from "./itineraryHelpers";
-import Nav2 from "../components/Nav2";
+import Nav from "../components/Nav";
 
 export default function Itinerary() {
   console.log("Itinerary component rendered");
@@ -73,7 +73,7 @@ export default function Itinerary() {
     return (
       <div className={styles.darkModeWrapper}>
         <div className={styles.container}>
-          <Nav2 />
+          <Nav />
           <div className={styles.title}>
             <h1>Your Travel Itinerary</h1>
             <div className={styles.buttonDiv}>
