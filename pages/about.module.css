@@ -18,50 +18,55 @@
 }
 
 .mission {
-  color: rgb(210, 217, 223);
-  font-family: "Manrope", sans-serif;
   display: flex;
   justify-content: space-evenly;
+  color: rgb(210, 217, 223);
+  font-family: "Manrope", sans-serif;
 }
 
 .namra {
-  height: 200px;
-  width: 300px;
+  height: 650px;
+  width: 370px;
+  border-radius: 20px;
+  background: rgba(36, 40, 63, 0.739);
 }
 
 .namraPic {
   height: 300px;
-  width: 100%;
+  width: 300px;
+  margin-left: 35px;
+  margin-top: 20px;
   border-radius: 50%;
 }
 
 .michael {
-  height: 200px;
-  width: 300px;
+  height: 650px;
+  width: 370px;
+  border-radius: 20px;
+  background: rgba(36, 40, 63, 0.739);
 }
 
 .michaelPic {
   height: 300px;
-  width: 100%;
+  width: 300px;
+  margin-left: 35px;
+  margin-top: 20px;
   border-radius: 50%;
 }
 
 .jennifer {
-  height: 200px;
-  width: 300px;
+  height: 650px;
+  width: 370px;
+  border-radius: 20px;
+  background: rgba(36, 40, 63, 0.739);
 }
 
 .jenniferPic {
   height: 300px;
-  width: 100%;
+  width: 300px;
+  margin-left: 35px;
+  margin-top: 20px;
   border-radius: 50%;
-}
-
-.h2 {
-  display: flex;
-  align-self: flex-start;
-  color: rgb(210, 217, 223);
-  font-family: "Manrope", sans-serif;
 }
 
 .h3 {
@@ -69,4 +74,50 @@
   align-self: flex-start;
   color: rgb(210, 217, 223);
   font-family: "Manrope", sans-serif;
+  font-size: 50px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 110px;
+  color: rgb(210, 217, 223);
+}
+
+.description {
+  display: flex;
+  align-self: center;
+  padding: 20px;
+  color: rgb(210, 217, 223);
+  font-family: "Manrope", sans-serif;
+}
+
+@media (max-width: 768px) {
+  .creators {
+    flex-wrap: wrap;
+  }
+
+  .namra, .michael, .jennifer {
+    height: 450px;
+    width: 250px;
+    margin-bottom: 50px;
+  }
+
+  .namraPic, .michaelPic, .jenniferPic {
+    height: 200px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+
+  .h3 {
+    font-size: 30px;
+  }
+
+  .title {
+    font-size: 18px;
+    margin-left: 0;
+    text-align: center;
+  }
 }
