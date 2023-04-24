@@ -18,55 +18,124 @@
 }
 
 .mission {
+  display: flex;
+  margin-left: 500px;
+  margin-bottom: 10px;
+  padding: 15px;
   color: rgb(210, 217, 223);
   font-family: "Manrope", sans-serif;
+  width: 1100px;
+}
+
+.mission h3{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  color: rgb(210, 217, 223);
+  font-family: "Manrope", sans-serif;
+  font-size: 25px;
+}
+
+.mission p{
+  text-align:center;
+  text-justify: inter-word;
+  font-size: 20px;
 }
 
 .namra {
-  height: 200px;
-  width: 300px;
+  height: 650px;
+  width: 370px;
+  border-radius: 20px;
+  background: rgba(36, 40, 63, 0.739);
 }
 
 .namraPic {
   height: 300px;
-  width: 100%;
+  width: 300px;
+  margin-left: 35px;
+  margin-top: 20px;
   border-radius: 50%;
 }
 
 .michael {
-  height: 200px;
-  width: 300px;
+  height: 650px;
+  width: 370px;
+  border-radius: 20px;
+  background: rgba(36, 40, 63, 0.739);
 }
 
 .michaelPic {
   height: 300px;
-  width: 100%;
+  width: 300px;
+  margin-left: 35px;
+  margin-top: 20px;
   border-radius: 50%;
 }
 
 .jennifer {
-  height: 200px;
-  width: 300px;
+  height: 650px;
+  width: 370px;
+  border-radius: 20px;
+  background: rgba(36, 40, 63, 0.739);
 }
 
 .jenniferPic {
   height: 300px;
-  width: 100%;
+  width: 300px;
+  margin-left: 35px;
+  margin-top: 20px;
   border-radius: 50%;
 }
 
-.h2 {
-  display: flex;
-  align-self: flex-start;
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 110px;
+  padding: 10px;
   color: rgb(210, 217, 223);
-  font-family: "Manrope", sans-serif;
 }
 
-.h3 {
+.description {
   display: flex;
-  align-self: flex-start;
+  align-self: center;
+  padding: 20px;
   color: rgb(210, 217, 223);
   font-family: "Manrope", sans-serif;
+  text-align:center;
+  text-justify: inter-word;
+}
+
+@media (max-width: 768px) {
+  .creators {
+    flex-wrap: wrap;
+  }
+
+  .namra, .michael, .jennifer {
+    height: 450px;
+    width: 250px;
+    margin-bottom: 50px;
+  }
+
+  .namraPic, .michaelPic, .jenniferPic {
+    height: 200px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+
+  .title {
+    font-size: 18px;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .mission h3{
+    font-size: 25px;
+  }
+  
+  .mission p{
+    text-align:center;
+    text-justify: inter-word;
+    font-size: 20px;
+  }
 }
