@@ -1,0 +1,72 @@
+.about {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(22, 23, 36);
+}
+
+.creators {
+  color: rgb(210, 217, 223);
+  font-family: "Manrope", sans-serif;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.mission {
+  color: rgb(210, 217, 223);
+  font-family: "Manrope", sans-serif;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.namra {
+  height: 200px;
+  width: 300px;
+}
+
+.namraPic {
+  height: 300px;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.michael {
+  height: 200px;
+  width: 300px;
+}
+
+.michaelPic {
+  height: 300px;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.jennifer {
+  height: 200px;
+  width: 300px;
+}
+
+.jenniferPic {
+  height: 300px;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.h2 {
+  display: flex;
+  align-self: flex-start;
+  color: rgb(210, 217, 223);
+  font-family: "Manrope", sans-serif;
+}
+
+.h3 {
+  display: flex;
+  align-self: flex-start;
+  color: rgb(210, 217, 223);
+  font-family: "Manrope", sans-serif;
+}
