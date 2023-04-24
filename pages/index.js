@@ -80,7 +80,7 @@ export default function Home() {
           </div>
           <form onSubmit={onSubmit}>
             <div className={styles.title1}>
-            <h4>CREATE YOUR PERFECT ITINERARY</h4>
+              <h4>CREATE YOUR PERFECT ITINERARY</h4>
             </div>
             <input
               type="text"
@@ -108,13 +108,13 @@ export default function Home() {
             <input
               type="number"
               name="budget"
-              placeholder="Budget: 2000"
+              placeholder="Budget: $2000"
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
             />
             <div>
-            <div className={styles.title2}>
-              <h5>Optional Preferences</h5>
+              <div className={styles.title2}>
+                <h5>Optional Preferences</h5>
               </div>
               <input
                 type="text"
