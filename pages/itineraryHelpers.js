@@ -54,6 +54,7 @@ export const downloadPDF = () => {
     "Terms of Use",
     "Download Itinerary as PDF",
     "Get Directions",
+    "report a map error"
   ];
 
   const filteredText = text.filter(
