@@ -1,0 +1,22 @@
+.dropdown {
+  position: absolute;
+  top: 750px;
+  left: 100px;
+  background-color: rgba(36, 40, 63, 0.739);
+  padding: 10px;
+  border-radius: 8px;
+  color: rgb(155, 160, 164);
+}
+
+
+.dropdown label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.dropdown select {
+  width: 100%;
+  background-color: rgba(60, 64, 83, 0.739);
+  border: none;
+  color: rgb(155, 160, 164);
+}
