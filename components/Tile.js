@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './Tile.module.css';
 import { useState } from 'react';
 
@@ -11,11 +12,11 @@ const Tile = ({ href, src, alt, text }) => {
 
   return (
     <div className={styles.tile}>
-      <a href={href}>
+      <Link href={href}>
         <div className={styles.imageContainer}>
           <Image src={src} alt={alt} width={325} height={325} />
         </div>
-      </a>
+      </Link>
       <div className={styles.overlay}>
         <p className={styles.overlayText}>{text}</p>
       </div>
