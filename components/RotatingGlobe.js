@@ -168,6 +168,8 @@ const Globe = () => {
           <option value="mapbox://styles/mapbox/outdoors-v11">Outdoors</option>
           <option value="mapbox://styles/mapbox/light-v10">Light</option>
           <option value="mapbox://styles/mapbox/dark-v10">Dark</option>
+          <option value="mapbox://styles/mapbox/navigation-day-v1">Day</option>
+          <option value="mapbox://styles/mapbox/navigation-night-v1">Night</option>
         </select>
       </div>
     </div>
