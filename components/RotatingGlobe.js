@@ -77,7 +77,12 @@ const Globe = () => {
       });
 
       newMap.on("styledata", () => {
-        newMap.setFog({});
+        newMap.setFog({range: [0.1, 6],
+          color: "#dc9f9f",
+          "horizon-blend": 0.3,
+          "high-color": "#245bde",
+          "space-color": "#000000",
+          "star-intensity": 0.15,});
       });
 
       setMap(newMap);
@@ -165,7 +170,6 @@ const Globe = () => {
             Satellite
           </option>
           <option value="mapbox://styles/mapbox/streets-v11">Streets</option>
-          <option value="mapbox://styles/mapbox/outdoors-v11">Outdoors</option>
           <option value="mapbox://styles/mapbox/light-v10">Light</option>
           <option value="mapbox://styles/mapbox/dark-v10">Dark</option>
           <option value="mapbox://styles/mapbox/navigation-day-v1">Day</option>

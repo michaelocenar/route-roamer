@@ -30,10 +30,9 @@
 .mission h3{
   display: flex;
   justify-content: center;
-  color: rgb(120, 109, 174);
+  color: rgb(123, 85, 172);
   font-family: "Manrope", sans-serif;
   font-size: 25px;
-  font-weight: bold;
 }
 
 .mission p{
@@ -89,17 +88,16 @@
 
 .title {
   font-size: 20px;
-  font-weight: 900;
+  font-weight: bold;
   margin-left: 110px;
   padding: 10px;
-  color: rgb(120, 109, 174);
+  color: rgb(123, 85, 172);
 }
 
 .description {
   display: flex;
   align-self: center;
   padding: 20px;
-  padding-top: 5px;
   color: rgb(210, 217, 223);
   font-family: "Manrope", sans-serif;
   text-align:center;
