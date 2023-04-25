@@ -28,7 +28,7 @@ const Globe = () => {
     "mapbox://styles/mapbox/streets-v11": {
       range: [0.1, 6],
       color: "#3e7fd9",
-      "horizon-blend": 0.1,
+      "horizon-blend": 0.10,
       "high-color": "#3e7fd9",
       "space-color": "#000000",
       "star-intensity": 0.15,
@@ -69,14 +69,18 @@ const Globe = () => {
         center: [-90, 40],
       });
 
-      setMap(newMap);
-    };
+      newMap.on("load", () => {
+        const fogSetting = fogSettings[selectedStyle];
+        if (fogSetting) {
+          newMap.setFog(fogSetting);
+        }
+      });
 
-    const setFogSettings = () => {
-      const fogSetting = fogSettings[selectedStyle];
-      if (map && fogSetting) {
-        map.setFog(fogSetting);
-      }
+      newMap.on("styledata", () => {
+        newMap.setFog({});
+      });
+
+      setMap(newMap);
     };
 
     if (!map) {
@@ -87,10 +91,8 @@ const Globe = () => {
       }, 1000 / 60);
     }
 
-    setFogSettings();
-
     return () => map?.remove();
-  }, [map, selectedStyle]);
+  }, [map]);
 
   const spinGlobe = () => {
     if (spinEnabled) {
@@ -136,8 +138,7 @@ const Globe = () => {
     if (map) {
       map.setStyle(newStyle);
     }
-  };
-
+  }
   return (
     <div style={{ position: "relative" }}>
       <div
