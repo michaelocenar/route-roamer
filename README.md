@@ -9,6 +9,13 @@ In the future, we plan to experiment with different AI models to reduce the resp
 
 [Jennifer Quintal](https://github.com/quinjenn) | [Namra Aslam](https://github.com/namraaslam) | [Michael Ocenar](https://github.com/michaelocenar)
 
+## Screenshots
+
+!["RouteRoamer Homepage"](https://github.com/michaelocenar/route-roamer/blob/edit-readme/public/screenshots/routeroamer-homepage.png?raw=true)
+!["RouteRoamer Generated Itinerary"](https://github.com/michaelocenar/route-roamer/blob/edit-readme/public/screenshots/routeroamer-generateditinerary.png?raw=true)
+!["RouteRoamer Premade Itinerary](https://github.com/michaelocenar/route-roamer/blob/edit-readme/public/screenshots/routeroamer-premadeitinerary.png?raw=true)
+!["RouteRoamer Profile"](https://github.com/michaelocenar/route-roamer/blob/edit-readme/public/screenshots/routeroamer-profile.png?raw=true)
+
 
 ## Setup
 
