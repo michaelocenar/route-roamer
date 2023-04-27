@@ -8,7 +8,8 @@ const About = () => {
       <Nav />
       <div className={styles.about}></div>
       <div className={styles.mission}>
-        <div><h3>About Route Roamer</h3>
+        <div><h2>About Route Roamer</h2>
+          <h3>"NAVIGATE WITH EASE, ROAM WITH CONFIDENCE"</h3>
           <p>Route Roamer simplifies travel planning by providing a user-friendly platform to create and share itineraries effortlessly. With personalized recommendations and detailed location markers powered by AI, our mission is to enhance the joy of travel by taking the hassle out of planning, allowing our users to focus on what matters most - the journey.</p>
         </div>
       </div>
