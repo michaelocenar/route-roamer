@@ -3,7 +3,7 @@ Introducing RouteRoamer, an elegant and sophisticated web application designed t
 
 RouteRoamer was created using Next.js, OpenAI API, Google Maps API, MapboxAPI, and PostgreSQL. 
 
-In the future, we plan to experiment with different AI models to reduce the response time from a minute to ideally <20 sdconds. We also aim to provide more detailed information about each location in the marker's infowindow in the map.
+In the future, we plan to experiment with different AI models to reduce the response time from a minute to under 20 seconds, ideally. We also aim to provide more detailed information about each location in the marker's infowindow in the map.
 
 ## Contributors 
 
