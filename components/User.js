@@ -1,4 +1,4 @@
-import { React, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styles from "/components/User.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
