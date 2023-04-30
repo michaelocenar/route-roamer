@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { items } from "../public/Items.json";
+import itemsData from "../public/Items.json";
 import { Carousel } from "react-bootstrap";
 
 
@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "/components/Carousel.module.css";
 
 export default function BootstrapCarousel() {
-  const { bootstrap } = items;
+  const { bootstrap } = itemsData;
   const [index, setIndex] = useState(0);
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
