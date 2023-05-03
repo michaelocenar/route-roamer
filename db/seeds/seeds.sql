@@ -153,7 +153,7 @@ VALUES
 
   
 INSERT INTO itinerary_activities (itinerary_id, date, label, activity, time, lat, lng, description, location) 
-VALUES 
+VALUES
   (8, '2023-05-04', 'Day 1', 'Tower of London', '10:00 am', '51.508039', '-0.075919', 'Visit the historic Tower of London, a 900-year-old castle and fortress that houses the Crown Jewels and the Royal Armouries.', 'London'),
   (8, '2023-05-04', 'Day 1', 'Big Ben', '2:00 pm', '51.5007292', '-0.1268141', 'Visit the iconic clock tower and see the stunning views of the London skyline from the top.', 'London'),
   (8, '2023-05-04', 'Day 1', 'London Eye', '5:00 pm', '51.503324', '-0.119543', 'Experience the breathtaking panoramic views of London from the London Eye and take a ride on the tallest Ferris wheel in Europe.', 'London'),
@@ -166,4 +166,8 @@ VALUES
   (8, '2023-05-07', 'Day 4', 'Hyde Park', '10:00 am', '51.5073', '-0.1658', 'Visit London"s largest park and take a stroll in the picturesque gardens and admire the beautiful monuments and sculptures.', 'London'),
   (8, '2023-05-07', 'Day 4', 'Covent Garden', '2:00 pm', '51.5128', '-0.1238', 'Visit this iconic market and enjoy the vibrant atmosphere and explore the many boutiques, shops and cafes.', 'London'),
   (8, '2023-05-07', 'Day 4', 'Piccadilly Circus', '5:00 pm', '51.5104', '-0.1351', 'Visit this bustling area and take in the stunning architecture and the vibrant atmosphere of this iconic London landmark.', 'London');
+
+
+
+
 
