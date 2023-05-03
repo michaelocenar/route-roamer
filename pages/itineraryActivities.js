@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import React, { useState, useRef } from "react";
-import { API_KEY, mapContainerStyle, googleMapsLibraries, downloadPDF } from "./itineraryHelpers";
+import { API_KEY, mapContainerStyle, googleMapsLibraries, downloadPDF } from "../helpers/itineraryHelpers";
 import Nav from "../components/Nav";
 import db from '../db';
 import styles from "./itineraryActivities.module.css";
