@@ -133,7 +133,7 @@ export default function Home() {
               <input
                 type="text"
                 name="Owned Credit Cards"
-                placeholder="American Express Platinum, Visa Infinite Privilege, Mastercard Muse"
+                placeholder="Credit Cards You Own (for example: American Express Platinum, Visa Infinite Privilege, etc."
                 value={preferences.activities}
                 onChange={(e) =>
                   setPreferences({ ...preferences, activities: e.target.value })
@@ -142,7 +142,7 @@ export default function Home() {
               <input
                 type="text"
                 name="Credit Score"
-                placeholder="700"
+                placeholder="Credit Score (for example: 700)"
                 value={preferences.accommodation}
                 onChange={(e) =>
                   setPreferences({
@@ -154,7 +154,7 @@ export default function Home() {
               <input
                 type="text"
                 name="Annual Household Income"
-                placeholder="$100000"
+                placeholder="Annual Household Income (for example: $100000)"
                 value={preferences.transportation}
                 onChange={(e) =>
                   setPreferences({
