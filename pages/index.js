@@ -18,6 +18,7 @@ export default function Home() {
   });
   const [result, setResult] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [usePoints, setUsePoints] = useState(false)
 
   const router = useRouter();
 
@@ -89,7 +90,7 @@ export default function Home() {
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
             />
-            <label for="dates" class={styles.label}>Start Date</label>
+            <label for="dates" className={styles.label}>Start Date</label>
             <input
               type="date"
               name="start_date"
@@ -97,7 +98,7 @@ export default function Home() {
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
-            <label for="dates" class={styles.label}>End Date</label>
+            <label for="dates" className={styles.label}>End Date</label>
             <input
               type="date"
               name="end_date"
@@ -112,14 +113,27 @@ export default function Home() {
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
             />
-            <div>
+            <div
+            className="checkbox-wrapper-1"
+            >
+              <input
+                type="checkbox"
+                name="points"
+                className="substituted"
+                value={usePoints}
+                onChange={(e) =>  setUsePoints(!usePoints)}
+              />
+              <label for="points">Pay with points</label>
+            </div><br />
+
+            <div style={{ display: usePoints ? "block" : "none" }}>
               <div className={styles.title2}>
-                <h5>Optional Preferences</h5>
+                <h5>Pay with Points</h5>
               </div>
               <input
                 type="text"
-                name="activities"
-                placeholder="Activity: Hiking, Shopping, Swimming"
+                name="Owned Credit Cards"
+                placeholder="American Express Platinum, Visa Infinite Privilege, Mastercard Muse"
                 value={preferences.activities}
                 onChange={(e) =>
                   setPreferences({ ...preferences, activities: e.target.value })
@@ -127,8 +141,8 @@ export default function Home() {
               />
               <input
                 type="text"
-                name="accommodation"
-                placeholder="Accomodation: Hotel, Hostel, AirBNB"
+                name="Credit Score"
+                placeholder="700"
                 value={preferences.accommodation}
                 onChange={(e) =>
                   setPreferences({
@@ -139,8 +153,8 @@ export default function Home() {
               />
               <input
                 type="text"
-                name="transportation"
-                placeholder="Transportation: Car, Train, Plane"
+                name="Annual Household Income"
+                placeholder="$100000"
                 value={preferences.transportation}
                 onChange={(e) =>
                   setPreferences({
