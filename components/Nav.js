@@ -20,10 +20,10 @@ const Nav = () => {
           <FontAwesomeIcon icon={faUser} className={styles.icon} style={{ color: '#ebebeb', marginRight: '20px' }} />
           <span className={styles.iconText}>Profile</span>
         </Link>
-        <Link href="/itineraries">
+        {/* <Link href="/itineraries">
           <FontAwesomeIcon icon={faRoute} className={styles.icon} style={{ color: '#ebebeb', marginRight: '20px' }} />
           <span className={styles.iconText}>For You</span>
-        </Link>
+        </Link> */}
         <Link href="/about">
           <FontAwesomeIcon icon={faCircleInfo} className={styles.icon} style={{ color: '#ebebeb', marginRight: '20px' }} />
           <span className={styles.iconText}>About</span>
